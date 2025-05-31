@@ -3,8 +3,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Fetch env variables with FEDRIX prefix
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.REACT_APP_FEDRIX_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.REACT_APP_FEDRIX_SUPABASE_ANON_KEY;
 
 // Validate presence of both keys
 if (!supabaseUrl || !supabaseAnonKey) {
