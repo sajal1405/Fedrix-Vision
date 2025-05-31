@@ -2,15 +2,14 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-// Fetch env variables with FEDRIX prefix
-const supabaseUrl = import.meta.env.REACT_APP_FEDRIX_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.REACT_APP_FEDRIX_SUPABASE_ANON_KEY;
+// ✅ Read environment variables correctly for Vite
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Validate presence of both keys
+// ✅ Error handling
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error("❌ Supabase credentials are missing in your .env file.");
-  throw new Error("Supabase URL or ANON KEY is undefined.");
+  console.error("❌ Missing Supabase credentials (check .env and deployment variables)");
+  throw new Error("Supabase credentials not found.");
 }
 
-// Create and export Supabase client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
