@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================
+   Fedrix Vision Base
+   =================== */
+body {
+  @apply bg-black text-white font-inter overflow-x-hidden min-h-screen;
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmYwYzhhIiBzdHJva2Utd2lkdGg9IjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iNCIgaGVpZ2h0PSI0IiByeD0iMiIvPjxwYXRoIGQ9Ik0xMiAxMiBtOC04IHYxNiBoLTE2IHoiLz48L3N2Zz4="), auto;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Links */
+a {
+  @apply text-fedrix transition;
+}
+a:hover {
+  @apply text-white;
+}
+
+/* Dashboard Layout */
+.dashboard-wrapper {
+  @apply flex min-h-screen;
+}
+
+.dashboard-main {
+  @apply flex flex-col flex-grow ml-[220px];
+}
+
+.dashboard-content {
+  @apply flex-grow p-8;
+}
+
+/* Login Container */
+.login-container {
+  @apply w-full max-w-xl mx-auto mt-24 p-8 rounded-2xl text-center backdrop-blur-lg border border-white/10 bg-white/5;
+}
+
+/* Inputs */
+.email-input,
+input[type="text"],
+textarea {
+  @apply w-full p-3 mb-4 rounded-lg bg-black text-white border border-white/20 text-base outline-none;
+}
+
+/* Buttons */
+button,
+.btn-primary {
+  @apply bg-fedrix text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
+}
+
+button:hover,
+.btn-primary:hover {
+  @apply bg-purple-700;
+}
+
+/* Avatar */
+.avatar-img {
+  @apply w-20 h-20 rounded-full object-cover bg-black p-1 border-2 border-fedrix mb-4;
+}
+
+/* Footer */
+footer {
+  @apply flex-shrink-0 text-center p-4 text-sm text-white/50 border-t border-white/10 bg-black/60;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
