@@ -26,7 +26,7 @@ const SocialMediaCalendar = () => {
   const fetchPosts = async () => {
     const { data } = await supabase.from("scheduled_posts").select("*").order("date", { ascending: true });
 
-    const visible = profile?.tier === "admin" ? data : data.filter((p) => p.created_by === user?.id);
+    const visible = profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
     setPosts(visible);
   };
 

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
-import { AuthContext } from "../../context/AuthContext";
 import { motion } from "framer-motion";
 import TaskCard from "./TaskCard";
 import TaskModal from "./TaskModal";
@@ -12,7 +11,6 @@ const columns = ["To Do", "In Progress", "Done"];
 
 const KanbanBoard = () => {
   const { profile } = useContext(UserProfileContext);
-  const { user } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [project, setProject] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +27,7 @@ const KanbanBoard = () => {
     const visibleTasks =
       profile?.tier === "admin"
         ? data
-        : data.filter((t) => t.created_by === user?.id);
+        : data.filter((t) => t.created_by === profile?.id);
 
     setTasks(visibleTasks);
   };
