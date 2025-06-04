@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import BlogList from "./BlogList";
-import BlogEditor from "./BlogEditor";
+import BlogList from "./BlogList.jsx";
+import BlogEditor from "./BlogEditor.jsx";
 import { supabase } from "../../supabaseClient";
 
 const BlogManager = () => {

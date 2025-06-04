@@ -1,14 +1,14 @@
 // src/components/dashboard/ClientDashboard.js
 
 import React from "react";
-import Sidebar from "../common/Sidebar";
-import Header from "../common/Header";
+import Sidebar from "../common/Sidebar.jsx";
+import Header from "../common/Header.jsx";
 
-import KanbanBoard from "../kanban/KanbanBoard";
-import Calendar from "../calendar/Calendar";
+import KanbanBoard from "../kanban/KanbanBoard.jsx";
+import Calendar from "../calendar/Calendar.jsx";
 import SocialMediaCalendar from "../calendar/SocialMediaCalendar";
 import PerformanceCharts from "../analytics/PerformanceCharts";
-import BlogManager from "../blog/BlogManager";
+import BlogManager from "../blog/BlogManager.jsx";
 
 const ClientDashboard = () => {
   return (
