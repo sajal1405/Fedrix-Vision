@@ -29,8 +29,8 @@ Copy the provided environment file and add your Supabase credentials:
 cp .env.example .env
 ```
 The app expects the following variables:
-- `VITE_SUPABASE_URL` – your Supabase project URL
-- `VITE_SUPABASE_ANON_KEY` – the public anon key
+- `REACT_APP_SUPABASE_URL` – your Supabase project URL
+- `REACT_APP_SUPABASE_ANON_KEY` – the public anon key
 
 ### 🚀 Development
 
