@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { UserProfileContext } from "../context/UserProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import KanbanBoard from "../components/kanban/KanbanBoard";
-import Calendar from "../components/calendar/Calendar";
-import BlogManager from "../components/blog/BlogManager";
+import KanbanBoard from "../components/kanban/KanbanBoard.jsx";
+import Calendar from "../components/calendar/Calendar.jsx";
+import BlogManager from "../components/blog/BlogManager.jsx";
 import modulesData from "../data/roles.json";
 
 const Dashboard = () => {
