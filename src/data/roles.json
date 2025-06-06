@@ -1,5 +1,12 @@
 {
   "roles": {
+    "superadmin": {
+      "modules": [
+        { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },
+        { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
+        { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." }
+      ]
+    },
     "admin": {
       "modules": [
         { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },

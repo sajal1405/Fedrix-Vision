@@ -35,7 +35,12 @@ const ProfileSetup = () => {
       name,
       company,
       avatar,
-      tier: supaUser.email.includes("admin") ? "admin" : "client",
+      tier:
+        supaUser.email === "sajal@fedrixgroup.com"
+          ? "superadmin"
+          : supaUser.email.includes("admin")
+            ? "admin"
+            : "client",
     };
 
     await supabase.from("profiles").upsert(profileData);
