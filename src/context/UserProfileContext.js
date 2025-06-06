@@ -1,6 +1,7 @@
 // src/context/UserProfileContext.js
 
 import React, { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const UserProfileContext = createContext();
 
@@ -25,4 +26,8 @@ export const UserProfileProvider = ({ children }) => {
       {children}
     </UserProfileContext.Provider>
   );
+};
+
+UserProfileProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
