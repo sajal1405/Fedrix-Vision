@@ -12,8 +12,6 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
   const [tag, setTag] = useState("");
   const [tagColor, setTagColor] = useState("#6f0c8a");
 
-  const user = supabase.auth.getUser(); // async inside useEffect
-
   useEffect(() => {
     if (taskToEdit) {
       setTitle(taskToEdit.title);
