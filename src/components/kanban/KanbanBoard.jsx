@@ -165,3 +165,11 @@ const KanbanColumn = ({ name, items, onDrop, onEdit, onDelete }) => {
     </motion.div>
   );
 };
+
+KanbanColumn.propTypes = {
+  name: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+  onDrop: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
