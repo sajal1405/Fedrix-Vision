@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -15,7 +15,7 @@ const Calendar = () => {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     const { data } = await supabase.from("events").select("*").order("start", { ascending: true });
 
     const filtered =
@@ -30,9 +30,8 @@ const Calendar = () => {
     }));
 
     setEvents(mapped);
-  };
+  }, [profile?.id]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!profile?.id) return;
     fetchEvents();
@@ -45,7 +44,7 @@ const Calendar = () => {
       .subscribe();
 
     return () => supabase.removeChannel(channel);
-  }, [profile?.id]);
+  }, [profile?.id, fetchEvents]);
 
   const handleSelectSlot = (slotInfo) => {
     setSelectedSlot(slotInfo);
