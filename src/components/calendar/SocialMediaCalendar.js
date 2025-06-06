@@ -21,7 +21,7 @@ const SocialMediaCalendar = () => {
       .subscribe();
 
     return () => supabase.removeChannel(channel);
-  }, [user?.email]);
+  }, [user?.email, profile?.id]);
 
   const fetchPosts = async () => {
     const { data } = await supabase.from("scheduled_posts").select("*").order("date", { ascending: true });
