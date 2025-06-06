@@ -31,4 +31,12 @@ npm install
 Electron loads the app from `http://localhost:3000`. Use:
 ```bash
 npm run electron
+```
+
+### Linting
+Run ESLint to check code quality:
+
+```bash
+npm run lint
+```
 

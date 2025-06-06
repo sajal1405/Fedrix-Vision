@@ -8,7 +8,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "npm run start & electron desktop",
-    "mobile": "cd mobile && npx react-native start"
+    "mobile": "cd mobile && npx react-native start",
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .js,.jsx"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
@@ -42,6 +43,8 @@
     "electron": "^29.2.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "postcss": "^8.5.4",
     "prettier": "^3.5.3",
     "tailwindcss": "^3.4.17"
