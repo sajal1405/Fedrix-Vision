@@ -35,10 +35,11 @@ The app expects the following variables:
 ### 🚀 Development
 
 #### Web
-Runs the Vite dev server on `http://localhost:3000`:
+Runs Create React App's `react-scripts` dev server on `http://localhost:3000`:
 ```bash
 npm start
 ```
+If you see "`react-scripts` is not recognized", ensure dependencies are installed with `npm install`.
 
 #### Desktop
 Electron loads the same dev server for the desktop app:
