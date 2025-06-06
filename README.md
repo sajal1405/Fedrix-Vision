@@ -46,6 +46,15 @@ Electron loads the same dev server for the desktop app:
 npm run electron
 ```
 
+
+### Linting
+Run ESLint to check code quality:
+
+```bash
+npm run lint
+```
+
+
 #### Mobile
 Start the React Native packager inside the `mobile` folder:
 ```bash
