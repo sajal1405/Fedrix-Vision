@@ -110,6 +110,7 @@ const LoginForm = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
             className="w-full p-3 mb-4 rounded-md bg-black border border-white/10 text-white"
           />
 
@@ -118,6 +119,7 @@ const LoginForm = () => {
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
             className="w-full p-3 mb-6 rounded-md bg-black border border-white/10 text-white"
           />
 
