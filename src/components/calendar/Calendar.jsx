@@ -23,7 +23,7 @@ const Calendar = () => {
     const filtered =
       profile?.tier === "admin"
         ? data
-        : data.filter((e) => e.created_by === user?.id);
+        : data.filter((e) => e.created_by === profile?.id);
 
     const mapped = filtered.map((ev) => ({
       ...ev,

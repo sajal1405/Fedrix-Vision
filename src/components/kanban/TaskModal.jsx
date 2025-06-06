@@ -35,7 +35,7 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const {
-      data: { user },
+      data: { user: supaUser },
     } = await supabase.auth.getUser();
 
     const taskData = {
@@ -46,8 +46,8 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
       priority,
       tag,
       tagColor,
-      email: user.email,
-      uid: user.id,
+      email: supaUser.email,
+      created_by: supaUser.id,
     };
 
     if (taskToEdit?.id) {
