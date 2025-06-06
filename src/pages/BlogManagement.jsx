@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { UserProfileContext } from "../context/UserProfileContext";
-import BlogManager from "../components/blog/BlogManager";
-import BlogList from "../components/blog/BlogList";
+import BlogManager from "../components/blog/BlogManager.jsx";
+import BlogList from "../components/blog/BlogList.jsx";
 
 const BlogManagement = () => {
   const { profile } = useContext(UserProfileContext);
