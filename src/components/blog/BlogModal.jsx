@@ -40,10 +40,11 @@ const BlogModal = ({ post, onClose }) => {
           )}
 
           <ReactMarkdown
-            children={post.content}
             remarkPlugins={[remarkGfm]}
             className="prose prose-invert max-w-none"
-          />
+          >
+            {post.content}
+          </ReactMarkdown>
         </motion.div>
       </motion.div>
     </AnimatePresence>
