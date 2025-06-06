@@ -10,8 +10,8 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
   const [project, setProject] = useState("");
   const [status, setStatus] = useState("To Do");
   const [priority, setPriority] = useState("Medium");
-  const [tag, setTag] = useState("");
-  const [tagColor, setTagColor] = useState("#6f0c8a");
+  const [customTag, setCustomTag] = useState("");
+  const [customColor, setCustomColor] = useState("#6f0c8a");
 
   useEffect(() => {
     if (taskToEdit) {
@@ -20,16 +20,16 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
       setProject(taskToEdit.project);
       setStatus(taskToEdit.status);
       setPriority(taskToEdit.priority || "Medium");
-      setTag(taskToEdit.tag || "");
-      setTagColor(taskToEdit.tagColor || "#6f0c8a");
+      setCustomTag(taskToEdit.custom_tag || "");
+      setCustomColor(taskToEdit.custom_color || "#6f0c8a");
     } else {
       setTitle("");
       setDescription("");
       setProject("");
       setStatus("To Do");
       setPriority("Medium");
-      setTag("");
-      setTagColor("#6f0c8a");
+      setCustomTag("");
+      setCustomColor("#6f0c8a");
     }
   }, [taskToEdit]);
 
@@ -45,8 +45,8 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
       project,
       status,
       priority,
-      tag,
-      tagColor,
+      custom_tag: customTag,
+      custom_color: customColor,
       email: supaUser.email,
       created_by: supaUser.id,
     };
@@ -127,14 +127,14 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
             <input
               type="text"
               placeholder="Custom tag (optional)"
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
+              value={customTag}
+              onChange={(e) => setCustomTag(e.target.value)}
               className="flex-1 p-3 rounded-lg bg-white/5 text-white border border-white/20"
             />
             <input
               type="color"
-              value={tagColor}
-              onChange={(e) => setTagColor(e.target.value)}
+              value={customColor}
+              onChange={(e) => setCustomColor(e.target.value)}
               className="w-12 h-12 rounded-full border border-white/20"
               title="Choose tag color"
             />
@@ -173,8 +173,8 @@ TaskModal.propTypes = {
     project: PropTypes.string,
     status: PropTypes.string,
     priority: PropTypes.string,
-    tag: PropTypes.string,
-    tagColor: PropTypes.string,
+    custom_tag: PropTypes.string,
+    custom_color: PropTypes.string,
   }),
 };
 
