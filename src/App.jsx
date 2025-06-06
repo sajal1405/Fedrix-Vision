@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState, useMemo } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard.jsx";
 import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
@@ -17,84 +21,97 @@ import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
+  const router = useMemo(
+    () =>
+      createBrowserRouter(
+        [
+          {
+            path: '/',
+            element: <Navigate to="/login" replace />,
+          },
+          {
+            path: '/login',
+            element: <Login />,
+          },
+          {
+            path: '/profile',
+            element: <ProfileSetup />,
+          },
+          {
+            path: '/dashboard',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <Dashboard />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/kanban',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <KanbanBoard />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/calendar',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <Calendar />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/blog',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <BlogManagement />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+        ],
+        {
+          future: {
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+          },
+        }
+      ),
+    []
+  );
+
   return (
-    <Router>
-      <AuthProvider>
-        <UserProfileProvider>
-          {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
-          <AnimatedBackground />
-          {!showSplash && (
-            <>
-              <Routes>
-                <Route path="/" element={<Navigate to="/login" replace />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/profile" element={<ProfileSetup />} />
-
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <>
-                        <Sidebar />
-                        <div className="flex flex-col flex-1">
-                          <Header />
-                          <Dashboard />
-                        </div>
-                      </>
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/dashboard/kanban"
-                  element={
-                    <ProtectedRoute>
-                      <>
-                        <Sidebar />
-                        <div className="flex flex-col flex-1">
-                          <Header />
-                          <KanbanBoard />
-                        </div>
-                      </>
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/dashboard/calendar"
-                  element={
-                    <ProtectedRoute>
-                      <>
-                        <Sidebar />
-                        <div className="flex flex-col flex-1">
-                          <Header />
-                          <Calendar />
-                        </div>
-                      </>
-                    </ProtectedRoute>
-                  }
-                />
-
-                <Route
-                  path="/dashboard/blog"
-                  element={
-                    <ProtectedRoute>
-                      <>
-                        <Sidebar />
-                        <div className="flex flex-col flex-1">
-                          <Header />
-                          <BlogManagement />
-                        </div>
-                      </>
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </>
-          )}
-        </UserProfileProvider>
-      </AuthProvider>
-    </Router>
+    <AuthProvider>
+      <UserProfileProvider>
+        {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
+        <AnimatedBackground />
+        {!showSplash && <RouterProvider router={router} />}
+      </UserProfileProvider>
+    </AuthProvider>
   );
 };
 

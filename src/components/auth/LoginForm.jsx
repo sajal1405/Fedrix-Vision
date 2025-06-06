@@ -68,17 +68,19 @@ const LoginForm = () => {
     };
 
     knob.addEventListener("mousedown", onDown);
-    knob.addEventListener("touchstart", onDown);
+    knob.addEventListener("touchstart", onDown, { passive: true });
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("touchmove", onMove);
+    window.addEventListener("touchmove", onMove, { passive: true });
     window.addEventListener("mouseup", onUp);
-    window.addEventListener("touchend", onUp);
+    window.addEventListener("touchend", onUp, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("touchend", onUp);
+      knob.removeEventListener("mousedown", onDown);
+      knob.removeEventListener("touchstart", onDown);
     };
   }, [slidIn, handleLogin]);
 
@@ -97,36 +99,43 @@ const LoginForm = () => {
 
         {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
 
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 mb-4 rounded-md bg-black border border-white/10 text-white"
-        />
-
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-6 rounded-md bg-black border border-white/10 text-white"
-        />
-
-        {/* Slide to login */}
-        <div ref={sliderRef} className="relative w-full h-12 bg-white/10 rounded-full border border-white/10 overflow-hidden select-none">
-          <div className="absolute w-full h-full flex items-center justify-center text-sm text-white/60">
-            Slide to Login →
-          </div>
-          <div
-            ref={knobRef}
-            className="absolute w-12 h-12 top-0 left-0 rounded-full"
-            style={{
-              background: "linear-gradient(145deg, #888, #ccc)",
-              boxShadow: "inset 1px 1px 5px #444, inset -1px -1px 5px #000",
-            }}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+        >
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 mb-4 rounded-md bg-black border border-white/10 text-white"
           />
-        </div>
+
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 mb-6 rounded-md bg-black border border-white/10 text-white"
+          />
+
+          {/* Slide to login */}
+          <div ref={sliderRef} className="relative w-full h-12 bg-white/10 rounded-full border border-white/10 overflow-hidden select-none">
+            <div className="absolute w-full h-full flex items-center justify-center text-sm text-white/60">
+              Slide to Login →
+            </div>
+            <div
+              ref={knobRef}
+              className="absolute w-12 h-12 top-0 left-0 rounded-full"
+              style={{
+                background: "linear-gradient(145deg, #888, #ccc)",
+                boxShadow: "inset 1px 1px 5px #444, inset -1px -1px 5px #000",
+              }}
+            />
+          </div>
+        </form>
       </motion.div>
     </div>
   );
