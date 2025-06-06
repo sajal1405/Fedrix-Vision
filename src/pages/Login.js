@@ -1,6 +1,6 @@
 import React from "react";
-import LoginForm from "../components/auth/LoginForm";
-import AnimatedBackground from "../components/common/AnimatedBackground";
+import LoginForm from "../components/auth/LoginForm.jsx";
+import AnimatedBackground from "../components/common/AnimatedBackground.jsx";
 
 const Login = () => {
   return (
