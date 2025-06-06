@@ -4,14 +4,12 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
-import { AuthContext } from "../../context/AuthContext";
 import EventModal from "./EventModal.jsx";
 
 const localizer = momentLocalizer(moment);
 
 const Calendar = () => {
   const { profile } = useContext(UserProfileContext);
-  const { user } = useContext(AuthContext);
 
   const [events, setEvents] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -34,6 +32,7 @@ const Calendar = () => {
     setEvents(mapped);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!profile?.id) return;
     fetchEvents();

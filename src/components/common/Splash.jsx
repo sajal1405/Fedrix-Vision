@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 
 const Splash = ({ onComplete }) => {
@@ -30,6 +31,10 @@ const Splash = ({ onComplete }) => {
       <div className="mt-6 w-32 h-1 rounded-full bg-fedrix animate-pulse" />
     </motion.div>
   );
+};
+
+Splash.propTypes = {
+  onComplete: PropTypes.func.isRequired,
 };
 
 export default Splash;

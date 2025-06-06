@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -47,6 +48,15 @@ const BlogModal = ({ post, onClose }) => {
       </motion.div>
     </AnimatePresence>
   );
+};
+
+BlogModal.propTypes = {
+  post: PropTypes.shape({
+    title: PropTypes.string,
+    image: PropTypes.string,
+    content: PropTypes.string,
+  }),
+  onClose: PropTypes.func.isRequired,
 };
 
 export default BlogModal;

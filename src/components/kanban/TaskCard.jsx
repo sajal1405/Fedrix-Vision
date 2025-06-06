@@ -1,5 +1,6 @@
 // src/components/kanban/TaskCard.jsx
 import React from "react";
+import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 
 const TaskCard = ({ task, onEdit, onDelete }) => {
@@ -51,6 +52,19 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
       </div>
     </div>
   );
+};
+
+TaskCard.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    priority: PropTypes.string,
+    custom_tag: PropTypes.string,
+    custom_color: PropTypes.string,
+  }).isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default TaskCard;
