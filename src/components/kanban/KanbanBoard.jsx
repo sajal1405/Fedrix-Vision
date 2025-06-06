@@ -31,7 +31,7 @@ const KanbanBoard = () => {
         : data.filter((t) => t.created_by === profile?.id);
 
     setTasks(visibleTasks);
-  }, [profile?.id]);
+  }, [profile?.id, profile?.tier]);
 
   // Initial + Real-time Sync
   useEffect(() => {

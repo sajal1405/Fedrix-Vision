@@ -30,7 +30,7 @@ const Calendar = () => {
     }));
 
     setEvents(mapped);
-  }, [profile?.id]);
+  }, [profile?.id, profile?.tier]);
 
   useEffect(() => {
     if (!profile?.id) return;
