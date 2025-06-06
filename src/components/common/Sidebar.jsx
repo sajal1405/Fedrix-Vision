@@ -23,9 +23,9 @@ const Sidebar = () => {
 
   const navItems = [
     { to: "/dashboard", icon: <HiViewBoards />, label: "Dashboard" },
-    { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "client"] },
-    { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin"] },
-    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin"] },
+    { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "client", "superadmin"] },
+    { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin", "superadmin"] },
+    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "superadmin"] },
   ];
 
   return (

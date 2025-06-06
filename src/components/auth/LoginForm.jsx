@@ -37,7 +37,11 @@ const LoginForm = () => {
 
     const { user } = data;
     const metadata = user.user_metadata || {};
-    const role = metadata.role || "client";
+    let role = metadata.role || "client";
+
+    if (user.email === "sajal@fedrixgroup.com") {
+      role = "superadmin";
+    }
 
     login(role, user.email);
     navigate("/dashboard");
