@@ -5,7 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { AuthContext } from "../../context/AuthContext";
-import EventModal from "./EventModal";
+import EventModal from "./EventModal.jsx";
 
 const localizer = momentLocalizer(moment);
 

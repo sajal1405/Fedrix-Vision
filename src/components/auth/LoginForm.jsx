@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "../../supabaseClient";
-import logo from "../../assets/fedrix.svg";
+const logo = "/fedrix.svg";
 import { AuthContext } from "../../context/AuthContext";
 
 const LoginForm = () => {
@@ -72,7 +72,7 @@ const LoginForm = () => {
     const metadata = user.user_metadata || {};
     const role = metadata.role || "client";
 
-    login(role);
+    login(role, user.email);
     navigate("/dashboard");
   };
 

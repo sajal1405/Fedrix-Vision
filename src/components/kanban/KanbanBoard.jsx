@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { motion } from "framer-motion";
-import TaskCard from "./TaskCard";
-import TaskModal from "./TaskModal";
+import TaskCard from "./TaskCard.jsx";
+import TaskModal from "./TaskModal.jsx";
 import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

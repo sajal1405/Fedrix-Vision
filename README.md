@@ -22,3 +22,13 @@ An enterprise-grade platform built for managing digital agency tasks:
 ### 📦 Install
 ```bash
 npm install
+```
+
+
+### 🚀 Development
+
+#### Desktop
+Electron loads the app from `http://localhost:3000`. Use:
+```bash
+npm run electron
+

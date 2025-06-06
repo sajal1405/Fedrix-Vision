@@ -13,7 +13,8 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL("http://localhost:3015");
+  // CRA dev server runs on port 3000 by default
+  mainWindow.loadURL("http://localhost:3000");
 
   mainWindow.on("closed", () => {
     mainWindow = null;
