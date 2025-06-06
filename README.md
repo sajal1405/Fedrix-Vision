@@ -2,18 +2,18 @@
 
 An enterprise-grade platform built for managing digital agency tasks:
 - 🔒 Supabase-backed auth, blog, kanban, calendar
-- ⚡ Electron desktop with fullscreen, splash screen
-- 🌌 Animated UI, custom cursor, GSAP transitions
+- ⚡ Electron desktop with fullscreen and splash screen
+- 🌌 Animated UI with GSAP transitions
 
 ---
 
 ## 🚀 Tech Stack
 
 - React 18 + React Router
-- Supabase (auth + db)
-- Electron 29 (for desktop)
+- Supabase (auth + database)
+- Electron 29 (desktop app)
+- React Native (mobile)
 - Chart.js + GSAP
-- Custom CSS animation, preloader, background mesh
 
 ---
 
@@ -24,14 +24,28 @@ An enterprise-grade platform built for managing digital agency tasks:
 npm install
 ```
 
+Copy the provided environment file and add your Supabase credentials:
+```bash
+cp .env.example .env
+```
+The app expects the following variables:
+- `VITE_SUPABASE_URL` – your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` – the public anon key
 
 ### 🚀 Development
 
+#### Web
+Runs the Vite dev server on `http://localhost:3000`:
+```bash
+npm start
+```
+
 #### Desktop
-Electron loads the app from `http://localhost:3000`. Use:
+Electron loads the same dev server for the desktop app:
 ```bash
 npm run electron
 ```
+
 
 ### Linting
 Run ESLint to check code quality:
@@ -40,3 +54,9 @@ Run ESLint to check code quality:
 npm run lint
 ```
 
+
+#### Mobile
+Start the React Native packager inside the `mobile` folder:
+```bash
+npm run mobile
+```
