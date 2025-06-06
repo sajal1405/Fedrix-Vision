@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { motion } from "framer-motion";
@@ -33,6 +34,7 @@ const KanbanBoard = () => {
   };
 
   // Initial + Real-time Sync
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!profile?.id) return;
     fetchTasks();

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../context/AuthContext";
 import BlogModal from "./BlogModal.jsx";
@@ -60,6 +61,18 @@ const BlogList = ({ posts, onEdit, onDelete }) => {
       <BlogModal post={previewPost} onClose={() => setPreviewPost(null)} />
     </motion.div>
   );
+};
+
+BlogList.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      snippet: PropTypes.string,
+      content: PropTypes.string,
+    })
+  ).isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default BlogList;

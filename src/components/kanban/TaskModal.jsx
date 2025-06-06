@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
 import { supabase } from "../../supabaseClient";
 import { motion } from "framer-motion";
@@ -159,6 +160,22 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
     </div>,
     document.body
   );
+};
+
+TaskModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSaved: PropTypes.func.isRequired,
+  taskToEdit: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    project: PropTypes.string,
+    status: PropTypes.string,
+    priority: PropTypes.string,
+    tag: PropTypes.string,
+    tagColor: PropTypes.string,
+  }),
 };
 
 export default TaskModal;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -80,6 +81,15 @@ const BlogEditor = ({ selectedPost, onSave, onCancel }) => {
       </form>
     </motion.div>
   );
+};
+
+BlogEditor.propTypes = {
+  selectedPost: PropTypes.shape({
+    title: PropTypes.string,
+    snippet: PropTypes.string,
+  }),
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func,
 };
 
 export default BlogEditor;

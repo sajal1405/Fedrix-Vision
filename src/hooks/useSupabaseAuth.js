@@ -8,7 +8,7 @@ export function useSupabaseAuth() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const session = supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(({ data }) => {
       setSession(data?.session || null);
       setUser(data?.session?.user || null);
     });

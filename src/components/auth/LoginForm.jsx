@@ -16,6 +16,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const knob = knobRef.current;
     const track = sliderRef.current;
