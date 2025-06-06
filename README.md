@@ -24,5 +24,11 @@ An enterprise-grade platform built for managing digital agency tasks:
 npm install
 ```
 
-### Environment
-Create a `.env` file based on `.env.example` and add your Supabase credentials.
+
+### 🚀 Development
+
+#### Desktop
+Electron loads the app from `http://localhost:3000`. Use:
+```bash
+npm run electron
+
