@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -16,7 +22,27 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleLogin = useCallback(async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError("Invalid email or password");
+      gsap.to(knobRef.current, { x: 0 });
+      setSlidIn(false);
+      return;
+    }
+
+    const { user } = data;
+    const metadata = user.user_metadata || {};
+    const role = metadata.role || "client";
+
+    login(role, user.email);
+    navigate("/dashboard");
+  }, [email, password, login, navigate]);
+
   useEffect(() => {
     const knob = knobRef.current;
     const track = sliderRef.current;
@@ -54,28 +80,7 @@ const LoginForm = () => {
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("touchend", onUp);
     };
-  }, [slidIn, email, password]);
-
-  const handleLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError("Invalid email or password");
-      gsap.to(knobRef.current, { x: 0 });
-      setSlidIn(false);
-      return;
-    }
-
-    const { user } = data;
-    const metadata = user.user_metadata || {};
-    const role = metadata.role || "client";
-
-    login(role, user.email);
-    navigate("/dashboard");
-  };
+  }, [slidIn, handleLogin]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 relative z-10">

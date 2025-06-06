@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -17,7 +17,7 @@ const KanbanBoard = () => {
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     const { data, error } = await supabase
       .from("tasks")
       .select("*")
@@ -31,10 +31,9 @@ const KanbanBoard = () => {
         : data.filter((t) => t.created_by === profile?.id);
 
     setTasks(visibleTasks);
-  };
+  }, [profile?.id]);
 
   // Initial + Real-time Sync
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!profile?.id) return;
     fetchTasks();
@@ -49,7 +48,7 @@ const KanbanBoard = () => {
       .subscribe();
 
     return () => supabase.removeChannel(taskChannel);
-  }, [profile?.id]);
+  }, [profile?.id, fetchTasks]);
 
   const grouped = columns.map((col) => ({
     name: col,
