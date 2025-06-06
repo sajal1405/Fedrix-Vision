@@ -72,7 +72,7 @@ const LoginForm = () => {
     const metadata = user.user_metadata || {};
     const role = metadata.role || "client";
 
-    login(role);
+    login(role, user.email);
     navigate("/dashboard");
   };
 
