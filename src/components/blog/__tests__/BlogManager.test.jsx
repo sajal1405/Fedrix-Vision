@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
 import BlogManager from '../BlogManager.jsx';
 import { AuthContext } from '../../../context/AuthContext';
 
@@ -44,6 +44,16 @@ beforeEach(() => {
   supabase.removeChannel.mockClear();
 });
 
+afterAll(() => {
+  supabase.from.mockImplementation(() => ({
+    select: jest.fn().mockReturnThis(),
+    insert: jest.fn().mockResolvedValue({ error: null }),
+    update: jest.fn(() => ({ eq: jest.fn().mockResolvedValue({ error: null }) })),
+    delete: jest.fn(() => ({ eq: jest.fn().mockResolvedValue({ error: null }) })),
+    eq: jest.fn().mockReturnThis(),
+  }));
+});
+
 const renderWithAuth = (ui) =>
   render(<AuthContext.Provider value={{ user: { role: 'admin' } }}>{ui}</AuthContext.Provider>);
 
@@ -61,4 +71,32 @@ test('refreshes posts when realtime event occurs', async () => {
   expect(selectMock).toHaveBeenCalledTimes(2);
 
   unmount();
+});
+
+test('displays error when fetch fails', async () => {
+  const errorSelect = jest.fn().mockResolvedValue({ data: null, error: { message: 'boom' } });
+  supabase.from.mockReturnValueOnce({ select: errorSelect });
+
+  renderWithAuth(<BlogManager />);
+
+  await waitFor(() => expect(screen.getByText('boom')).toBeInTheDocument());
+});
+
+test('shows error when saving post fails', async () => {
+  const initialSelect = jest.fn().mockResolvedValue({ data: [], error: null });
+  const insertMock = jest.fn().mockResolvedValue({ error: { message: 'save fail' } });
+  supabase.from
+    .mockReturnValueOnce({ select: initialSelect })
+    .mockReturnValueOnce({ insert: insertMock });
+
+  renderWithAuth(<BlogManager />);
+
+  await waitFor(() => expect(initialSelect).toHaveBeenCalled());
+
+  fireEvent.change(screen.getByPlaceholderText('Enter Title'), { target: { value: 'A' } });
+  fireEvent.change(screen.getByPlaceholderText('Short description...'), { target: { value: 'B' } });
+  fireEvent.click(screen.getByText('Save'));
+
+  await waitFor(() => expect(insertMock).toHaveBeenCalled());
+  await waitFor(() => expect(screen.getByText('save fail')).toBeInTheDocument());
 });

@@ -16,16 +16,25 @@ const SocialMediaCalendar = () => {
   const [idea, setIdea] = useState("");
   const [platformInput, setPlatformInput] = useState("");
   const [projectInput, setProjectInput] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const fetchPosts = useCallback(async () => {
-    const { data } = await supabase
-      .from("scheduled_posts")
-      .select("*")
-      .order("date", { ascending: true });
+    try {
+      const { data, error } = await supabase
+        .from("scheduled_posts")
+        .select("*")
+        .order("date", { ascending: true });
 
-    const visible =
-      profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
-    setPosts(visible);
+      if (error) throw error;
+
+      const visible =
+        profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
+      setPosts(visible);
+      setErrorMsg("");
+    } catch (err) {
+      console.error("Fetch posts error", err);
+      setErrorMsg(err.message || "Failed to fetch posts");
+    }
   }, [profile?.id, profile?.tier]);
 
   useEffect(() => {
@@ -52,20 +61,27 @@ const SocialMediaCalendar = () => {
   const handleAdd = async (e) => {
     e.preventDefault();
     if (!newDate || !idea) return;
-    const content = await generateContent(idea);
-    await supabase.from("scheduled_posts").insert({
-      content,
-      date: newDate,
-      platform: platformInput,
-      project: projectInput,
-      approved: false,
-      created_by: profile?.id,
-    });
-    setIdea("");
-    setNewDate("");
-    setPlatformInput("");
-    setProjectInput("");
-    fetchPosts();
+    try {
+      const content = await generateContent(idea);
+      const { error } = await supabase.from("scheduled_posts").insert({
+        content,
+        date: newDate,
+        platform: platformInput,
+        project: projectInput,
+        approved: false,
+        created_by: profile?.id,
+      });
+      if (error) throw error;
+      setIdea("");
+      setNewDate("");
+      setPlatformInput("");
+      setProjectInput("");
+      setErrorMsg("");
+      fetchPosts();
+    } catch (err) {
+      console.error("Create post error", err);
+      setErrorMsg(err.message || "Failed to create post");
+    }
   };
 
   return (
@@ -96,6 +112,12 @@ const SocialMediaCalendar = () => {
           </select>
         </div>
       </div>
+
+      {errorMsg && (
+        <div className="text-red-400 bg-white/5 border border-red-400/50 p-2 rounded-md mb-4">
+          {errorMsg}
+        </div>
+      )}
 
       <form onSubmit={handleAdd} className="mb-6 space-y-3">
         <textarea
