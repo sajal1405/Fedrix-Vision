@@ -113,8 +113,27 @@ SQL for the analytics tables lives in `supabase/create_analytics_tables.sql`. Ru
 psql < supabase/create_analytics_tables.sql
 ```
 
-Create the reminders table as well:
+
+### Database Setup
+The application requires the following tables inside your Supabase database:
+
+- `tasks` – no migration script included (create manually)
+- `posts` – no migration script included (create manually)
+- `scheduled_posts` – no migration script included (create manually)
+- `reminders` – no migration script included (create manually)
+- `events` – no migration script included (create manually)
+- `campaign_roi` – defined in `supabase/create_analytics_tables.sql`
+- `page_visits` – defined in `supabase/create_analytics_tables.sql`
+- `profiles` – no migration script included (create manually)
+
+Apply the SQL files using the `psql` CLI. For example:
+
 ```bash
+# Create analytics tables
+psql < supabase/create_analytics_tables.sql
+
+# Run your own scripts for the other tables, e.g.
+
 psql < supabase/create_reminders_table.sql
 ```
 
