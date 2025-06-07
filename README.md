@@ -139,14 +139,14 @@ psql < supabase/create_reminders_table.sql
 ### Database Setup
 The application requires the following tables inside your Supabase database:
 
-- `tasks` – no migration script included (create manually)
-- `posts` – no migration script included (create manually)
-- `scheduled_posts` – no migration script included (create manually)
+- `tasks` – defined in `supabase/create_tasks_table.sql`
+- `posts` – defined in `supabase/create_posts_table.sql`
+- `scheduled_posts` – defined in `supabase/create_scheduled_posts_table.sql`
 - `reminders` – defined in `supabase/create_reminders_table.sql`
-- `events` – no migration script included (create manually)
+- `events` – defined in `supabase/create_events_table.sql`
 - `campaign_roi` – defined in `supabase/create_analytics_tables.sql`
 - `page_visits` – defined in `supabase/create_analytics_tables.sql`
-- `profiles` – no migration script included (create manually)
+- `profiles` – defined in `supabase/create_profiles_table.sql`
 
 Apply the SQL files using the `psql` CLI. For example:
 
@@ -154,8 +154,12 @@ Apply the SQL files using the `psql` CLI. For example:
 # Create analytics tables
 psql < supabase/create_analytics_tables.sql
 
-# Run your own scripts for the other tables, e.g.
-
+# Create core application tables
+psql < supabase/create_profiles_table.sql
+psql < supabase/create_tasks_table.sql
+psql < supabase/create_posts_table.sql
+psql < supabase/create_scheduled_posts_table.sql
+psql < supabase/create_events_table.sql
 psql < supabase/create_reminders_table.sql
 ```
 
