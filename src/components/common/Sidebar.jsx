@@ -30,7 +30,7 @@ const Sidebar = () => {
     { to: "/dashboard", icon: <HiViewBoards />, label: "Dashboard" },
     { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "client", "superadmin"] },
     { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin", "superadmin"] },
-    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "superadmin"] },
+    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "client", "superadmin"] },
     { to: "/dashboard/agent", icon: <HiOutlineSparkles />, label: "AI Agent", roles: ["admin", "superadmin"] },
     { to: "/dashboard/reminders", icon: <HiOutlineBell />, label: "Reminders", roles: ["admin", "client", "superadmin"] },
     { to: "/dashboard/users", icon: <HiOutlineUsers />, label: "Users", roles: ["superadmin"] },
