@@ -22,14 +22,14 @@ const Header = () => {
         <button onClick={toggleSidebar} className="text-white focus:outline-none">
           <HiMenuAlt3 className="text-2xl" />
         </button>
-        <div className="text-lg font-bold text-fedrix tracking-wide">
+        <div className="text-lg font-bold text-gray-300 tracking-wide">
           Fedrix Vision
         </div>
       </div>
 
       <div className="flex items-center gap-4">
         {/* Tier badge */}
-        <div className="text-white/80 text-xs bg-fedrix/10 px-3 py-1 rounded-full border border-fedrix uppercase tracking-wide">
+        <div className="text-white/80 text-xs bg-gray-700/10 px-3 py-1 rounded-full border border-gray-700 uppercase tracking-wide">
           {tier}
         </div>
         <UserMenu />

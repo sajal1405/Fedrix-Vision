@@ -88,7 +88,7 @@ const ReminderList = () => {
         />
         <button
           type="submit"
-          className="bg-fedrix text-white px-4 rounded-md"
+          className="bg-gray-700 text-white px-4 rounded-md"
         >
           Add
         </button>

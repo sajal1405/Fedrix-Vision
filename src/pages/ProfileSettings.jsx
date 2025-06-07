@@ -53,7 +53,7 @@ const ProfileSettings = () => {
           type="submit"
           whileTap={{ scale: 0.96 }}
           whileHover={{ scale: 1.02 }}
-          className="bg-fedrix text-white px-6 py-2 rounded-md"
+          className="bg-gray-700 text-white px-6 py-2 rounded-md"
         >
           Save Settings
         </motion.button>

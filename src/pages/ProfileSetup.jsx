@@ -63,7 +63,7 @@ const ProfileSetup = () => {
           <img
             src={avatar}
             alt="avatar"
-            className="w-24 h-24 rounded-full border-4 border-fedrix shadow-md bg-black p-1"
+            className="w-24 h-24 rounded-full border-4 border-gray-700 shadow-md bg-black p-1"
           />
         </div>
 
@@ -89,7 +89,7 @@ const ProfileSetup = () => {
             type="submit"
             whileTap={{ scale: 0.96 }}
             whileHover={{ scale: 1.02 }}
-            className="w-full bg-fedrix hover:bg-purple-800 text-white font-bold py-3 rounded-lg shadow-lg transition-all"
+            className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg shadow-lg transition-all"
           >
             Save & Continue →
           </motion.button>

@@ -29,8 +29,8 @@ const CampaignAnalytics = () => {
       {
         label: "Campaign ROI",
         data: rows.map((r) => r.roi),
-        borderColor: "#6f0c8a",
-        backgroundColor: "rgba(111, 12, 138, 0.1)",
+        borderColor: "#444",
+        backgroundColor: "rgba(68, 68, 68, 0.1)",
         tension: 0.3,
         pointRadius: 4,
         fill: true,

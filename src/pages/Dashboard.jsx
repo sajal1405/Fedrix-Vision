@@ -39,7 +39,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            👋 Welcome back, <span className="text-fedrix">{firstName}</span>
+            👋 Welcome back, <span className="text-gray-300">{firstName}</span>
           </motion.div>
 
           {allowedModules.includes("kanban") && (

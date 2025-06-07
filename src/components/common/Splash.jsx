@@ -28,7 +28,7 @@ const Splash = ({ onComplete }) => {
       >
         Fedrix Vision
       </motion.div>
-      <div className="mt-6 w-32 h-1 rounded-full bg-fedrix animate-pulse" />
+      <div className="mt-6 w-32 h-1 rounded-full bg-gray-700 animate-pulse" />
     </motion.div>
   );
 };

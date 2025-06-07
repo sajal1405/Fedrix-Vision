@@ -151,7 +151,7 @@ const SocialMediaCalendar = () => {
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-1 bg-fedrix rounded-md text-sm disabled:opacity-50"
+          className="px-4 py-1 bg-gray-700 rounded-md text-sm disabled:opacity-50"
         >
           {loading ? "Generating..." : "Add Draft"}
         </button>
@@ -173,7 +173,7 @@ const SocialMediaCalendar = () => {
               </p>
             </div>
             <div className="flex flex-col items-end">
-              <span className="text-xs text-white/60 bg-fedrix/10 border border-fedrix px-3 py-1 rounded-full mb-1">
+              <span className="text-xs text-white/60 bg-gray-700/10 border border-gray-700 px-3 py-1 rounded-full mb-1">
                 {dayjs(post.date).format("MMM D")}
               </span>
               {!post.approved && (
