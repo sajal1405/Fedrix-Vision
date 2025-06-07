@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -88,7 +88,7 @@ const SocialMediaCalendar = () => {
               </p>
             </div>
             <span className="text-xs text-white/60 bg-fedrix/10 border border-fedrix px-3 py-1 rounded-full">
-              {moment(post.date).format("MMM D")}
+              {dayjs(post.date).format("MMM D")}
             </span>
           </li>
         ))}
