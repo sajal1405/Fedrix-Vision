@@ -1,4 +1,5 @@
 # Fedrix Vision – Fullstack Digital Marketing Suite
+[![CI](https://github.com/your-org/fedrix-vision/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/fedrix-vision/actions/workflows/ci.yml)
 
 An enterprise-grade platform built for managing digital agency tasks:
 - 🔒 Supabase-backed auth, blog, kanban, calendar
@@ -71,5 +72,8 @@ npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
 
-### Offline blog access
-Visiting `/dashboard/blog` once online will cache its scripts and Supabase blog API responses using a service worker. After the initial visit, you can return to the blog page even without an internet connection.
+
+### Continuous Integration
+
+A GitHub Actions workflow installs dependencies, lints the codebase and runs tests on every push and pull request.
+
