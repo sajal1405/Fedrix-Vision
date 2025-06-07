@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const EventModal = ({ slot, event, onClose, onSave }) => {
   const [title, setTitle] = useState("");
@@ -147,6 +148,26 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
     </div>,
     document.body
   );
+};
+
+EventModal.propTypes = {
+  slot: PropTypes.shape({
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
+  }),
+  event: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    start: PropTypes.instanceOf(Date),
+    end: PropTypes.instanceOf(Date),
+    project: PropTypes.string,
+    priority: PropTypes.string,
+    tag: PropTypes.string,
+    tag_color: PropTypes.string,
+  }),
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
 export default EventModal;
