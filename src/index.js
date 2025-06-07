@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { AnimatePresence } from "framer-motion";
 import ErrorBoundary from "./components/common/ErrorBoundary.jsx";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 // Initialize AOS on load
 AOS.init({
@@ -26,3 +27,6 @@ root.render(
     </AnimatePresence>
   </React.StrictMode>
 );
+
+// Register service worker for offline functionality
+serviceWorkerRegistration.register();

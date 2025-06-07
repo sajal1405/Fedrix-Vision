@@ -72,6 +72,8 @@ npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
 
+
 ### Continuous Integration
 
 A GitHub Actions workflow installs dependencies, lints the codebase and runs tests on every push and pull request.
+
