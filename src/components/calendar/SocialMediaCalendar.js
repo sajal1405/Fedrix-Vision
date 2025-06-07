@@ -8,7 +8,7 @@ import { AgentAIContext } from "../../context/AgentAIContext";
 const SocialMediaCalendar = () => {
   const { profile } = useContext(UserProfileContext);
   const { user } = useContext(AuthContext);
-  const { generateContent } = useContext(AgentAIContext);
+  const { generateContent, loading } = useContext(AgentAIContext);
   const [posts, setPosts] = useState([]);
   const [platform, setPlatform] = useState("");
   const [project, setProject] = useState("");
@@ -126,8 +126,12 @@ const SocialMediaCalendar = () => {
             className="p-2 bg-black border border-white/20 rounded-md text-white"
           />
         </div>
-        <button type="submit" className="px-4 py-1 bg-fedrix rounded-md text-sm">
-          Add Draft
+        <button
+          type="submit"
+          disabled={loading}
+          className="px-4 py-1 bg-fedrix rounded-md text-sm disabled:opacity-50"
+        >
+          {loading ? "Generating..." : "Add Draft"}
         </button>
       </form>
 
