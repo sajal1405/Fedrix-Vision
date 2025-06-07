@@ -38,16 +38,27 @@ const KanbanBoard = () => {
     if (!profile?.id) return;
     fetchTasks();
 
-    const taskChannel = supabase
-      .channel("realtime-tasks")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "tasks" },
-        () => fetchTasks()
-      )
-      .subscribe();
+    let taskChannel;
+    try {
+      taskChannel = supabase
+        .channel("realtime-tasks")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "tasks" },
+          () => fetchTasks()
+        )
+        .subscribe();
+    } catch (err) {
+      console.log(
+        "Real-time updates disabled: could not subscribe to tasks channel."
+      );
+    }
 
-    return () => supabase.removeChannel(taskChannel);
+    return () => {
+      if (taskChannel) {
+        supabase.removeChannel(taskChannel);
+      }
+    };
   }, [profile?.id, fetchTasks]);
 
   const grouped = columns.map((col) => ({
