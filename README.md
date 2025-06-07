@@ -25,12 +25,13 @@ An enterprise-grade platform built for managing digital agency tasks:
 npm install
 ```
 
-Copy `.env.example` to `.env`. The example file contains placeholder values:
+Create your own `.env` file using the provided template. The repository does not
+track this file, so you need to copy it manually:
 ```bash
 cp .env.example .env
 ```
-Open `.env` and replace the placeholders with your Supabase project URL and anon key.
-The app expects the following variables:
+Open `.env` and replace the placeholders with your Supabase project URL and anon
+key. The app expects the following variables:
 - `REACT_APP_SUPABASE_URL` – your Supabase project URL
 - `REACT_APP_SUPABASE_ANON_KEY` – the public anon key
 
