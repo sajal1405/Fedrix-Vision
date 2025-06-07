@@ -1,5 +1,8 @@
 jest.mock('../../../supabaseClient', () => ({
-  supabase: { auth: { signInWithPassword: jest.fn() } },
+  supabase: {
+    auth: { signInWithPassword: jest.fn() },
+    from: jest.fn(() => ({ select: jest.fn(() => ({ eq: jest.fn(() => ({ single: jest.fn() })) })) })),
+  },
 }));
 
 import { render, screen, fireEvent } from '@testing-library/react';
