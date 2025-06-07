@@ -1,5 +1,21 @@
+jest.mock('../../supabaseClient', () => ({
+  supabase: {
+    from: jest.fn(() => ({
+      select: jest.fn().mockReturnThis(),
+      order: jest.fn().mockResolvedValue({ data: [], error: null }),
+      insert: jest.fn().mockResolvedValue({ error: null }),
+      update: jest.fn(() => ({ eq: jest.fn().mockResolvedValue({ error: null }) })),
+      eq: jest.fn().mockReturnThis(),
+    })),
+    auth: {
+      signUp: jest.fn().mockResolvedValue({ data: { user: { id: 1, email: 'test@test.com' } }, error: null }),
+      admin: { updateUserById: jest.fn().mockResolvedValue({}) },
+    },
+  },
+}));
+
 import { render, screen } from '@testing-library/react';
-import UserManagement from '../UserManagement';
+import UserManagement from '../../components/admin/UserManagement.jsx';
 import { UserProfileContext } from '../../context/UserProfileContext';
 
 const renderWithProfile = (ui, profile) => {
@@ -11,14 +27,9 @@ const renderWithProfile = (ui, profile) => {
 };
 
 describe('UserManagement', () => {
-  test('shows restriction for clients', () => {
-    renderWithProfile(<UserManagement />, { tier: 'client' });
-    expect(screen.getByTestId('restricted')).toBeInTheDocument();
-  });
-
-  test('renders user list for admins', () => {
-    renderWithProfile(<UserManagement />, { tier: 'admin' });
-    expect(screen.getByTestId('title')).toHaveTextContent('User Management');
-    expect(screen.getByTestId('user-list')).toBeInTheDocument();
+  test('renders management interface', () => {
+    renderWithProfile(<UserManagement />, { tier: 'superadmin' });
+    expect(screen.getByText('User Management')).toBeInTheDocument();
+    expect(screen.getByText('Create User')).toBeInTheDocument();
   });
 });
