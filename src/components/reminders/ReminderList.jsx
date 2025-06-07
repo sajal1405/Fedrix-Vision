@@ -7,6 +7,7 @@ const ReminderList = () => {
   const [reminders, setReminders] = useState([]);
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const fetchReminders = useCallback(async () => {
     const { data, error } = await supabase
@@ -18,6 +19,7 @@ const ReminderList = () => {
       console.error("Failed to fetch reminders", error);
       // If you receive a 404, ensure `supabase/create_reminders_table.sql` was run
       // to create the table inside your project.
+      setErrorMsg(error.message || "Failed to fetch reminders");
       setReminders([]);
       return;
     }
@@ -28,6 +30,7 @@ const ReminderList = () => {
         : data.filter((r) => r.created_by === profile?.id);
 
     setReminders(filtered || []);
+    setErrorMsg("");
   }, [profile?.id, profile?.tier]);
 
   useEffect(() => {
@@ -95,6 +98,11 @@ const ReminderList = () => {
           Add
         </button>
       </form>
+      {errorMsg && (
+        <div className="text-red-400 bg-white/5 border border-red-400/50 p-2 rounded-md">
+          {errorMsg}
+        </div>
+      )}
       <ul className="space-y-2" data-testid="reminder-list">
         {reminders.map((r) => (
           <li key={r.id} className="flex items-center gap-2">
