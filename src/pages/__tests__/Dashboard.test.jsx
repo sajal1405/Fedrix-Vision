@@ -5,11 +5,31 @@ import { UserProfileContext } from '../../context/UserProfileContext';
 import { AuthContext } from '../../context/AuthContext';
 import { SidebarContext } from '../../context/SidebarContext';
 
-jest.mock('../../components/kanban/KanbanBoard.jsx', () => () => <div data-testid="kanban" />);
-jest.mock('../../components/calendar/Calendar.jsx', () => () => <div data-testid="calendar" />);
-jest.mock('../../components/blog/BlogManager.jsx', () => () => <div data-testid="blog" />);
-jest.mock('../../components/ai/AgentDashboard.jsx', () => () => <div data-testid="agent" />);
-jest.mock('../../components/reminders/ReminderList.jsx', () => () => <div data-testid="reminders" />);
+jest.mock('../../components/kanban/KanbanBoard.jsx', () => {
+  return function MockKanbanBoard() {
+    return <div data-testid="kanban" />;
+  };
+});
+jest.mock('../../components/calendar/Calendar.jsx', () => {
+  return function MockCalendar() {
+    return <div data-testid="calendar" />;
+  };
+});
+jest.mock('../../components/blog/BlogManager.jsx', () => {
+  return function MockBlogManager() {
+    return <div data-testid="blog" />;
+  };
+});
+jest.mock('../../components/ai/AgentDashboard.jsx', () => {
+  return function MockAgentDashboard() {
+    return <div data-testid="agent" />;
+  };
+});
+jest.mock('../../components/reminders/ReminderList.jsx', () => {
+  return function MockReminderList() {
+    return <div data-testid="reminders" />;
+  };
+});
 
 const profile = { name: 'John Doe' };
 
