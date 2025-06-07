@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 import { supabase } from "../../supabaseClient";
 
 const Header = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const { profile, logoutProfile } = useContext(UserProfileContext);
   const navigate = useNavigate();
+  const tier = profile?.tier || user?.role || "client";
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -31,7 +32,7 @@ const Header = () => {
       <div className="flex items-center gap-4">
         {/* Tier badge */}
         <div className="text-white/80 text-xs bg-fedrix/10 px-3 py-1 rounded-full border border-fedrix uppercase tracking-wide">
-          {profile?.tier || "client"}
+          {tier}
         </div>
 
         {/* Avatar */}
