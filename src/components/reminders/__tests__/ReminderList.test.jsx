@@ -76,3 +76,9 @@ test('renders reminders from Supabase', async () => {
   expect(selectMock).toHaveBeenCalled();
   expect(screen.getByTestId('reminder-list').children.length).toBe(1);
 });
+
+test('displays error when fetch fails', async () => {
+  orderMock.mockResolvedValueOnce({ data: null, error: { message: 'boom' } });
+  renderList();
+  await waitFor(() => expect(screen.getByText('boom')).toBeInTheDocument());
+});
