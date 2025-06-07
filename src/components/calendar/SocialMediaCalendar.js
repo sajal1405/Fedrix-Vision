@@ -3,13 +3,19 @@ import dayjs from "dayjs";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { AuthContext } from "../../context/AuthContext";
+import { AgentAIContext } from "../../context/AgentAIContext";
 
 const SocialMediaCalendar = () => {
   const { profile } = useContext(UserProfileContext);
   const { user } = useContext(AuthContext);
+  const { generateContent } = useContext(AgentAIContext);
   const [posts, setPosts] = useState([]);
   const [platform, setPlatform] = useState("");
   const [project, setProject] = useState("");
+  const [newDate, setNewDate] = useState("");
+  const [idea, setIdea] = useState("");
+  const [platformInput, setPlatformInput] = useState("");
+  const [projectInput, setProjectInput] = useState("");
 
   const fetchPosts = useCallback(async () => {
     const { data } = await supabase
@@ -43,6 +49,25 @@ const SocialMediaCalendar = () => {
   const platforms = [...new Set(posts.map((p) => p.platform))];
   const projects = [...new Set(posts.map((p) => p.project))];
 
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    if (!newDate || !idea) return;
+    const content = await generateContent(idea);
+    await supabase.from("scheduled_posts").insert({
+      content,
+      date: newDate,
+      platform: platformInput,
+      project: projectInput,
+      approved: false,
+      created_by: profile?.id,
+    });
+    setIdea("");
+    setNewDate("");
+    setPlatformInput("");
+    setProjectInput("");
+    fetchPosts();
+  };
+
   return (
     <div className="mt-10 bg-white/5 p-6 border border-white/10 rounded-xl shadow-xl">
       <div className="flex items-center justify-between mb-4">
@@ -72,6 +97,40 @@ const SocialMediaCalendar = () => {
         </div>
       </div>
 
+      <form onSubmit={handleAdd} className="mb-6 space-y-3">
+        <textarea
+          value={idea}
+          onChange={(e) => setIdea(e.target.value)}
+          placeholder="Content idea"
+          className="w-full p-2 bg-black border border-white/20 rounded-md text-white"
+        />
+        <div className="grid grid-cols-3 gap-2">
+          <input
+            type="date"
+            value={newDate}
+            onChange={(e) => setNewDate(e.target.value)}
+            className="p-2 bg-black border border-white/20 rounded-md text-white"
+          />
+          <input
+            type="text"
+            value={platformInput}
+            onChange={(e) => setPlatformInput(e.target.value)}
+            placeholder="Platform"
+            className="p-2 bg-black border border-white/20 rounded-md text-white"
+          />
+          <input
+            type="text"
+            value={projectInput}
+            onChange={(e) => setProjectInput(e.target.value)}
+            placeholder="Project"
+            className="p-2 bg-black border border-white/20 rounded-md text-white"
+          />
+        </div>
+        <button type="submit" className="px-4 py-1 bg-fedrix rounded-md text-sm">
+          Add Draft
+        </button>
+      </form>
+
       <ul className="space-y-4">
         {filtered.length === 0 && (
           <li className="text-white/60 text-sm">No posts found for selected filters.</li>
@@ -87,9 +146,14 @@ const SocialMediaCalendar = () => {
                 {post.platform} • {post.project}
               </p>
             </div>
-            <span className="text-xs text-white/60 bg-fedrix/10 border border-fedrix px-3 py-1 rounded-full">
-              {dayjs(post.date).format("MMM D")}
-            </span>
+            <div className="flex flex-col items-end">
+              <span className="text-xs text-white/60 bg-fedrix/10 border border-fedrix px-3 py-1 rounded-full mb-1">
+                {dayjs(post.date).format("MMM D")}
+              </span>
+              {!post.approved && (
+                <span className="text-[10px] text-yellow-400">Draft</span>
+              )}
+            </div>
           </li>
         ))}
       </ul>

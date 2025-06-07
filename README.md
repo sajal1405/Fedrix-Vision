@@ -25,14 +25,16 @@ An enterprise-grade platform built for managing digital agency tasks:
 npm install
 ```
 
-Copy `.env.example` to `.env`. The example file contains placeholder values:
+Create your own `.env` file using the provided template. The repository does not
+track this file, so you need to copy it manually:
 ```bash
 cp .env.example .env
 ```
-Open `.env` and replace the placeholders with your Supabase project URL and anon key.
-The app expects the following variables:
+Open `.env` and replace the placeholders with your Supabase project URL and anon
+key. The app expects the following variables:
 - `REACT_APP_SUPABASE_URL` – your Supabase project URL
 - `REACT_APP_SUPABASE_ANON_KEY` – the public anon key
+- `REACT_APP_HF_API_URL` – optional HuggingFace inference endpoint used by the AI agent
 
 ### 🚀 Development
 
@@ -71,6 +73,10 @@ Run all React tests once and exit:
 npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
+
+### 🤖 AI Agent
+The Agent dashboard uses a public HuggingFace endpoint to generate draft social posts.
+Set `REACT_APP_HF_API_URL` if you wish to point to a different model or self-hosted endpoint.
 
 
 ### Continuous Integration

@@ -21,6 +21,8 @@ import Splash from "./components/common/Splash";
 import { SidebarProvider } from "./context/SidebarContext";
 import DashboardLayout from "./components/common/DashboardLayout.jsx";
 import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
+import { AgentAIProvider } from "./context/AgentAIContext";
+import AgentDashboard from "./components/ai/AgentDashboard.jsx";
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -104,7 +106,9 @@ const App = () => {
           {
             path: '/dashboard/agent',
             element: (
+
               <ProtectedRoute requiredRole="agent">
+
                 <DashboardLayout>
                   <AgentDashboard />
                 </DashboardLayout>
@@ -135,19 +139,21 @@ const App = () => {
   return (
     <AuthProvider>
       <UserProfileProvider>
-        <SidebarProvider>
-          {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
-          <AnimatedBackground />
-          {!showSplash && (
-            <RouterProvider
-              router={router}
-              future={{
-                v7_startTransition: true,
-                v7_relativeSplatPath: true,
-              }}
-            />
-          )}
-        </SidebarProvider>
+        <AgentAIProvider>
+          <SidebarProvider>
+            {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
+            <AnimatedBackground />
+            {!showSplash && (
+              <RouterProvider
+                router={router}
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true,
+                }}
+              />
+            )}
+          </SidebarProvider>
+        </AgentAIProvider>
       </UserProfileProvider>
     </AuthProvider>
   );

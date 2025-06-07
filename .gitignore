@@ -3,10 +3,11 @@ node_modules/
 *.log
 *.lock
 
-# Environment + build
 .env
+# Environment files
 .env.local
 .env.*.local
+# Build output
 build/
 dist/
 

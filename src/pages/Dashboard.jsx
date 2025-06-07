@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import KanbanBoard from "../components/kanban/KanbanBoard.jsx";
 import Calendar from "../components/calendar/Calendar.jsx";
 import BlogManager from "../components/blog/BlogManager.jsx";
+import AgentDashboard from "../components/ai/AgentDashboard.jsx";
 import modulesData from "../data/roles.json";
 
 const Dashboard = () => {
@@ -70,6 +71,17 @@ const Dashboard = () => {
             >
               <h3 className="text-white font-bold mb-3">📝 Blog Manager</h3>
               <BlogManager />
+            </motion.div>
+          )}
+
+          {allowedModules.includes("agent") && (
+            <motion.div
+              data-aos="fade-up"
+              className="bg-white/5 border border-white/10 p-6 rounded-xl shadow-lg"
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-white font-bold mb-3">🤖 AI Agent</h3>
+              <AgentDashboard />
             </motion.div>
           )}
         </div>
