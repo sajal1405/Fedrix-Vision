@@ -10,6 +10,7 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
   const [priority, setPriority] = useState("Medium");
   const [tag, setTag] = useState("");
   const [tagColor, setTagColor] = useState("#6f0c8a");
+  const [type, setType] = useState("meeting");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
@@ -23,11 +24,13 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
       setPriority(event.priority || "Medium");
       setTag(event.tag || "");
       setTagColor(event.tag_color || "#6f0c8a");
+      setType(event.type || "meeting");
     } else if (slot?.start) {
       const startTime = new Date(slot.start).toISOString().slice(0, 16);
       const endTime = new Date(slot.end || slot.start).toISOString().slice(0, 16);
       setStart(startTime);
       setEnd(endTime);
+      setType("meeting");
     }
   }, [event, slot]);
 
@@ -43,6 +46,7 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
       tag,
       tag_color: tagColor,
       priority,
+      type,
     });
   };
 
@@ -100,6 +104,17 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
               onChange={(e) => setProject(e.target.value)}
               className="p-3 bg-white/10 border border-white/20 rounded-md"
             />
+
+            <select
+              aria-label="Event Type"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="p-3 bg-white/10 border border-white/20 rounded-md"
+            >
+              <option value="meeting">Meeting</option>
+              <option value="appointment">Appointment</option>
+              <option value="reminder">Reminder</option>
+            </select>
 
             <select
               value={priority}
@@ -165,6 +180,7 @@ EventModal.propTypes = {
     priority: PropTypes.string,
     tag: PropTypes.string,
     tag_color: PropTypes.string,
+    type: PropTypes.string,
   }),
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

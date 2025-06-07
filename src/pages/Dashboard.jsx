@@ -8,6 +8,7 @@ import KanbanBoard from "../components/kanban/KanbanBoard.jsx";
 import Calendar from "../components/calendar/Calendar.jsx";
 import BlogManager from "../components/blog/BlogManager.jsx";
 import AgentDashboard from "../components/ai/AgentDashboard.jsx";
+import ReminderList from "../components/reminders/ReminderList.jsx";
 import modulesData from "../data/roles.json";
 
 const Dashboard = () => {
@@ -84,6 +85,15 @@ const Dashboard = () => {
               <AgentDashboard />
             </motion.div>
           )}
+
+          <motion.div
+            data-aos="fade-up"
+            className="bg-white/5 border border-white/10 p-6 rounded-xl shadow-lg"
+            whileHover={{ scale: 1.02 }}
+          >
+            <h3 className="text-white font-bold mb-3">🔔 Reminders</h3>
+            <ReminderList />
+          </motion.div>
         </div>
 
         <footer className="text-center mt-10 text-white/30 text-sm">

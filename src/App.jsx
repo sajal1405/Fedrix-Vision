@@ -115,6 +115,16 @@ const App = () => {
             ),
           },
           {
+            path: '/dashboard/reminders',
+            element: (
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Reminders />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
             path: '/dashboard/users',
             element: (
               <ProtectedRoute requiredRole="superadmin">
