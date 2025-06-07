@@ -48,7 +48,7 @@ const KanbanBoard = () => {
           () => fetchTasks()
         )
         .subscribe();
-    } catch (err) {
+    } catch {
       console.log(
         "Real-time updates disabled: could not subscribe to tasks channel."
       );
