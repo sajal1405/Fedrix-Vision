@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import { Calendar as BigCalendar, dayjsLocalizer } from "react-big-calendar";
+import dayjs from "dayjs";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import EventModal from "./EventModal.jsx";
 
-const localizer = momentLocalizer(moment);
+const localizer = dayjsLocalizer(dayjs);
 
 const Calendar = () => {
   const { profile } = useContext(UserProfileContext);
