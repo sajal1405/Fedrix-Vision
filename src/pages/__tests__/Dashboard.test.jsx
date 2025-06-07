@@ -5,6 +5,12 @@ import { UserProfileContext } from '../../context/UserProfileContext';
 import { AuthContext } from '../../context/AuthContext';
 import { SidebarContext } from '../../context/SidebarContext';
 
+jest.mock('../../components/kanban/KanbanBoard.jsx', () => () => <div data-testid="kanban" />);
+jest.mock('../../components/calendar/Calendar.jsx', () => () => <div data-testid="calendar" />);
+jest.mock('../../components/blog/BlogManager.jsx', () => () => <div data-testid="blog" />);
+jest.mock('../../components/ai/AgentDashboard.jsx', () => () => <div data-testid="agent" />);
+jest.mock('../../components/reminders/ReminderList.jsx', () => () => <div data-testid="reminders" />);
+
 const profile = { name: 'John Doe' };
 
 function renderWithRole(role) {

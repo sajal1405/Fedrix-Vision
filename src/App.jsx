@@ -9,7 +9,6 @@ import Dashboard from "./pages/Dashboard.jsx";
 import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
-import AgentDashboard from "./pages/AgentDashboard.jsx";
 import UserManagement from "./components/admin/UserManagement.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -23,6 +22,7 @@ import DashboardLayout from "./components/common/DashboardLayout.jsx";
 import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 import { AgentAIProvider } from "./context/AgentAIContext";
 import AgentDashboard from "./components/ai/AgentDashboard.jsx";
+import Reminders from "./pages/Reminders.jsx";
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -111,6 +111,16 @@ const App = () => {
 
                 <DashboardLayout>
                   <AgentDashboard />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/reminders',
+            element: (
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Reminders />
                 </DashboardLayout>
               </ProtectedRoute>
             ),
