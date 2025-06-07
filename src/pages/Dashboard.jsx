@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { UserProfileContext } from "../context/UserProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { SidebarContext } from "../context/SidebarContext";
@@ -11,8 +12,14 @@ import modulesData from "../data/roles.json";
 const Dashboard = () => {
   const { profile } = useContext(UserProfileContext);
   const { user } = useContext(AuthContext);
-  const { isOpen } = useContext(SidebarContext);
-  const firstName = profile?.name?.split(" ")[0] || "User";
+
+
+  if (!profile?.name) {
+    return <Navigate to="/profile" replace />;
+  }
+
+  const firstName = profile.name.split(" ")[0];
+
 
   const role = user?.role || "guest";
   const allowedModules = modulesData.roles?.[role]?.modules?.map((mod) => mod.id) || [];
