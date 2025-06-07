@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
+import UserManagement from "./components/admin/UserManagement.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
 import ProfileSettings from "./pages/ProfileSettings.jsx";
 import { AuthProvider } from "./context/AuthContext";
@@ -95,14 +96,18 @@ const App = () => {
             ),
           },
           {
-            path: '/dashboard/settings',
+
+            path: '/dashboard/users',
             element: (
-              <ProtectedRoute>
+              <ProtectedRoute requiredRole="superadmin">
+
                 <>
                   <Sidebar />
                   <div className="flex flex-col flex-1">
                     <Header />
-                    <ProfileSettings />
+
+                    <UserManagement />
+
                   </div>
                 </>
               </ProtectedRoute>
