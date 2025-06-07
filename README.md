@@ -46,9 +46,19 @@ npm start
 If you see "`react-scripts` is not recognized", ensure dependencies are installed with `npm install`.
 
 #### Desktop
-Electron loads the same dev server for the desktop app:
+Electron loads the same dev server for the desktop app. The window URL can be
+configured via the `DESKTOP_BASE_URL` variable in your `.env` file (defaults to
+`http://localhost:3000`).
+
+Run in development:
 ```bash
 npm run electron
+```
+
+Create a production build and launch Electron against it:
+```bash
+npm run build
+cd desktop && npm start
 ```
 
 
@@ -64,6 +74,10 @@ npm run lint
 Start the React Native packager inside the `mobile` folder:
 ```bash
 npm run mobile
+```
+Then build the native app (choose the platform you need):
+```bash
+npx react-native run-android # or run-ios
 ```
 
 ### Testing

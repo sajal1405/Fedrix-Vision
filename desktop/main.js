@@ -13,8 +13,21 @@ function createWindow() {
     },
   });
 
-  // CRA dev server runs on port 3000 by default
-  mainWindow.loadURL("http://localhost:3000");
+  const baseUrl = process.env.DESKTOP_BASE_URL || "http://localhost:3000";
+
+  const dashboardRoutes = {
+    main: `${baseUrl}/dashboard`,
+    kanban: `${baseUrl}/dashboard/kanban`,
+    calendar: `${baseUrl}/dashboard/calendar`,
+    blog: `${baseUrl}/dashboard/blog`,
+    agent: `${baseUrl}/dashboard/agent`,
+    users: `${baseUrl}/dashboard/users`,
+    profile: `${baseUrl}/dashboard/profile`,
+    settings: `${baseUrl}/dashboard/settings`,
+  };
+
+  // Load the main dashboard route by default
+  mainWindow.loadURL(dashboardRoutes.main);
 
   mainWindow.on("closed", () => {
     mainWindow = null;
