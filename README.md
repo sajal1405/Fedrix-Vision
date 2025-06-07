@@ -42,6 +42,16 @@ Before launching the dashboard, run the migration that creates the `reminders` t
 psql < supabase/create_reminders_table.sql
 ```
 
+### Troubleshooting
+
+If you encounter a `404` error on `/rest/v1/reminders`, the `reminders` table
+has likely not been created in your Supabase project. Apply the migration using
+`psql`:
+
+```bash
+psql < supabase/create_reminders_table.sql
+```
+
 ### 🚀 Development
 
 #### Web
