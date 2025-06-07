@@ -9,10 +9,16 @@ const ReminderList = () => {
   const [dueDate, setDueDate] = useState("");
 
   const fetchReminders = useCallback(async () => {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("reminders")
       .select("*")
       .order("due_date", { ascending: true });
+
+    if (error) {
+      console.error("Failed to fetch reminders", error);
+      setReminders([]);
+      return;
+    }
 
     const filtered =
       profile?.tier === "admin" || profile?.tier === "superadmin"

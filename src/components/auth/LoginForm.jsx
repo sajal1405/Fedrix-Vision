@@ -122,6 +122,7 @@ const LoginForm = () => {
         )}
 
         <form
+          data-testid="login-form"
           onSubmit={(e) => {
             e.preventDefault();
             handleLogin();
@@ -163,13 +164,6 @@ const LoginForm = () => {
             />
           </div>
 
-          {/* Standard login button */}
-          <button
-            type="submit"
-            className="w-full mt-4 p-3 rounded-md bg-blue-600 text-white hover:bg-blue-700"
-          >
-            Login
-          </button>
         </form>
       </motion.div>
     </div>
