@@ -39,7 +39,7 @@ export const UserProfileProvider = ({ children }) => {
       }
     };
     if (!profile) load();
-  }, []); // run once on mount
+  }, [profile]); // run once on mount
 
   return (
     <UserProfileContext.Provider value={{ profile, saveProfile, logoutProfile }}>

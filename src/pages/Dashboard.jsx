@@ -12,6 +12,7 @@ import modulesData from "../data/roles.json";
 const Dashboard = () => {
   const { profile } = useContext(UserProfileContext);
   const { user } = useContext(AuthContext);
+  const { isOpen } = useContext(SidebarContext);
 
 
   if (!profile?.name) {
