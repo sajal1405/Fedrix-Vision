@@ -92,6 +92,14 @@ supabase db query "alter table events add column type text not null default 'mee
 The Agent dashboard uses a public HuggingFace endpoint to generate draft social posts.
 Set `REACT_APP_HF_API_URL` if you wish to point to a different model or self-hosted endpoint. This value is read by the context when calling `generateContent`.
 
+### Database
+SQL for the analytics tables lives in `supabase/create_analytics_tables.sql`. Run the script in your Supabase project to create the `campaign_roi` and `page_visits` tables:
+
+```bash
+psql < supabase/create_analytics_tables.sql
+```
+
+
 
 ### Continuous Integration
 
