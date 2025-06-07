@@ -7,7 +7,7 @@ import { AuthContext } from '../../../context/AuthContext';
 const renderWithProviders = (
   ui,
   {
-    profile = { name: 'Test User' },
+    profile = { name: 'Test User', avatar: 'avatar.png' },
     logout = jest.fn(),
     logoutProfile = jest.fn(),
   } = {}
@@ -38,6 +38,13 @@ describe('UserMenu', () => {
     renderWithProviders(<UserMenu />);
     fireEvent.click(screen.getByTestId('menu-toggle'));
     expect(screen.getByTestId('profile-link')).toBeInTheDocument();
+  });
+
+  test('renders avatar image when provided', () => {
+    renderWithProviders(<UserMenu />);
+    const img = screen.getByTestId('avatar-img');
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', 'avatar.png');
   });
 
   test('logout button triggers both context methods', () => {
