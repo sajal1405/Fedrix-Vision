@@ -4,22 +4,22 @@ import React, {
   useEffect,
   useContext,
   useCallback,
-} from "react";
-import gsap from "gsap";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { supabase } from "../../supabaseClient";
-const logo = "/fedrix.svg";
-import { AuthContext } from "../../context/AuthContext";
-import { UserProfileContext } from "../../context/UserProfileContext";
+} from 'react';
+import gsap from 'gsap';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { supabase } from '../../supabaseClient';
+const logo = '/fedrix.svg';
+import { AuthContext } from '../../context/AuthContext';
+import { UserProfileContext } from '../../context/UserProfileContext';
 
 const LoginForm = () => {
   const sliderRef = useRef(null);
   const knobRef = useRef(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [slidIn, setSlidIn] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { saveProfile } = useContext(UserProfileContext);
@@ -31,7 +31,7 @@ const LoginForm = () => {
     });
 
     if (error) {
-      setError("Invalid email or password");
+      setError('Invalid email or password');
       gsap.to(knobRef.current, { x: 0 });
       setSlidIn(false);
       return;
@@ -39,25 +39,25 @@ const LoginForm = () => {
 
     const { user } = data;
     const metadata = user.user_metadata || {};
-    let role = metadata.role || "client";
+    let role = metadata.role || 'client';
 
-    if (user.email === "sajal@fedrixgroup.com") {
-      role = "superadmin";
+    if (user.email === 'sajal@fedrixgroup.com') {
+      role = 'superadmin';
     }
 
     login(role, user.email);
 
     const { data: profile, error: profileError } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
       .single();
 
     if (profile && !profileError) {
       saveProfile(profile);
-      navigate("/dashboard");
+      navigate('/dashboard');
     } else {
-      navigate("/profile");
+      navigate('/profile');
     }
   }, [email, password, login, navigate, saveProfile]);
 
@@ -85,20 +85,20 @@ const LoginForm = () => {
       isDragging = false;
     };
 
-    knob.addEventListener("mousedown", onDown);
-    knob.addEventListener("touchstart", onDown, { passive: true });
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("touchmove", onMove, { passive: true });
-    window.addEventListener("mouseup", onUp);
-    window.addEventListener("touchend", onUp, { passive: true });
+    knob.addEventListener('mousedown', onDown);
+    knob.addEventListener('touchstart', onDown, { passive: true });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("touchmove", onMove);
-      window.removeEventListener("mouseup", onUp);
-      window.removeEventListener("touchend", onUp);
-      knob.removeEventListener("mousedown", onDown);
-      knob.removeEventListener("touchstart", onDown);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchend', onUp);
+      knob.removeEventListener('mousedown', onDown);
+      knob.removeEventListener('touchstart', onDown);
     };
   }, [slidIn, handleLogin]);
 
@@ -112,10 +112,14 @@ const LoginForm = () => {
       >
         <div className="text-center mb-6">
           <img src={logo} alt="Fedrix Logo" className="h-12 mx-auto" />
-          <h2 className="text-white text-xl font-bold mt-4">Sign In to Fedrix Vision</h2>
+          <h2 className="text-white text-xl font-bold mt-4">
+            Sign In to Fedrix Vision
+          </h2>
         </div>
 
-        {error && <p className="text-red-500 text-sm mb-3 text-center">{error}</p>}
+        {error && (
+          <p className="text-red-500 text-sm mb-3 text-center">{error}</p>
+        )}
 
         <form
           onSubmit={(e) => {
@@ -142,7 +146,10 @@ const LoginForm = () => {
           />
 
           {/* Slide to login */}
-          <div ref={sliderRef} className="relative w-full h-12 bg-white/10 rounded-full border border-white/10 overflow-hidden select-none">
+          <div
+            ref={sliderRef}
+            className="relative w-full h-12 bg-white/10 rounded-full border border-white/10 overflow-hidden select-none"
+          >
             <div className="absolute w-full h-full flex items-center justify-center text-sm text-white/60">
               Slide to Login →
             </div>
@@ -150,11 +157,19 @@ const LoginForm = () => {
               ref={knobRef}
               className="absolute w-12 h-12 top-0 left-0 rounded-full"
               style={{
-                background: "linear-gradient(145deg, #888, #ccc)",
-                boxShadow: "inset 1px 1px 5px #444, inset -1px -1px 5px #000",
+                background: 'linear-gradient(145deg, #888, #ccc)',
+                boxShadow: 'inset 1px 1px 5px #444, inset -1px -1px 5px #000',
               }}
             />
           </div>
+
+          {/* Standard login button */}
+          <button
+            type="submit"
+            className="w-full mt-4 p-3 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Login
+          </button>
         </form>
       </motion.div>
     </div>
