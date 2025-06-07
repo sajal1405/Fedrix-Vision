@@ -13,9 +13,16 @@ export const AgentAIProvider = ({ children, generated: initialGenerated = "" }) 
   const [loading, setLoading] = useState(false);
 
   const generateContent = async (prompt) => {
+    const apiUrl = process.env.REACT_APP_HF_API_URL;
+    if (!apiUrl) {
+      console.error(
+        "REACT_APP_HF_API_URL is not set. Skipping AI content generation."
+      );
+      return "";
+    }
     setLoading(true);
     try {
-      const res = await fetch(process.env.REACT_APP_HF_API_URL, {
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ inputs: prompt }),

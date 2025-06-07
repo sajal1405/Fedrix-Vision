@@ -15,6 +15,7 @@ function TestComponent() {
 
 describe('AgentAIContext', () => {
   beforeEach(() => {
+    process.env.REACT_APP_HF_API_URL = 'http://example.com';
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue([{ generated_text: 'hello world' }]),
     });
@@ -45,5 +46,23 @@ describe('AgentAIContext', () => {
       process.env.REACT_APP_HF_API_URL,
       expect.objectContaining({ method: 'POST' })
     );
+  });
+
+  test('returns empty string when API url missing', async () => {
+    delete process.env.REACT_APP_HF_API_URL;
+
+    render(
+      <AgentAIProvider>
+        <TestComponent />
+      </AgentAIProvider>
+    );
+
+    let result;
+    await act(async () => {
+      result = await ctx.generateContent('test');
+    });
+
+    expect(result).toBe('');
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 });
