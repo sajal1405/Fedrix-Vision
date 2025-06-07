@@ -44,13 +44,9 @@ const App = () => {
             path: '/dashboard/profile',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <Profile />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <Profile />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
@@ -58,13 +54,9 @@ const App = () => {
             path: '/dashboard/settings',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <ProfileSettings />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <ProfileSettings />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
