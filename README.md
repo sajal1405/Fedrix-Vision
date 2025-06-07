@@ -113,6 +113,7 @@ SQL for the analytics tables lives in `supabase/create_analytics_tables.sql`. Ru
 psql < supabase/create_analytics_tables.sql
 ```
 
+
 ### Database Setup
 The application requires the following tables inside your Supabase database:
 
@@ -132,6 +133,7 @@ Apply the SQL files using the `psql` CLI. For example:
 psql < supabase/create_analytics_tables.sql
 
 # Run your own scripts for the other tables, e.g.
+
 psql < supabase/create_reminders_table.sql
 ```
 
