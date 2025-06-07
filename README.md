@@ -70,3 +70,6 @@ Run all React tests once and exit:
 npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
+
+### Offline blog access
+Visiting `/dashboard/blog` once online will cache its scripts and Supabase blog API responses using a service worker. After the initial visit, you can return to the blog page even without an internet connection.
