@@ -15,8 +15,8 @@ import { AuthProvider } from "./context/AuthContext";
 import { UserProfileProvider } from "./context/UserProfileContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Splash from "./components/common/Splash";
-import Sidebar from "./components/common/Sidebar.jsx";
-import Header from "./components/common/Header.jsx";
+import { SidebarProvider } from "./context/SidebarContext";
+import DashboardLayout from "./components/common/DashboardLayout.jsx";
 import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 
 const App = () => {
@@ -42,13 +42,9 @@ const App = () => {
             path: '/dashboard',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <Dashboard />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <Dashboard />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
@@ -56,13 +52,9 @@ const App = () => {
             path: '/dashboard/kanban',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <KanbanBoard />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <KanbanBoard />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
@@ -70,13 +62,9 @@ const App = () => {
             path: '/dashboard/calendar',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <Calendar />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <Calendar />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
@@ -84,31 +72,19 @@ const App = () => {
             path: '/dashboard/blog',
             element: (
               <ProtectedRoute>
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    <BlogManagement />
-                  </div>
-                </>
+                <DashboardLayout>
+                  <BlogManagement />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
           {
-
             path: '/dashboard/users',
             element: (
               <ProtectedRoute requiredRole="superadmin">
-
-                <>
-                  <Sidebar />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-
-                    <UserManagement />
-
-                  </div>
-                </>
+                <DashboardLayout>
+                  <UserManagement />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
@@ -126,17 +102,19 @@ const App = () => {
   return (
     <AuthProvider>
       <UserProfileProvider>
-        {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
-        <AnimatedBackground />
-        {!showSplash && (
-          <RouterProvider
-            router={router}
-            future={{
-              v7_startTransition: true,
-              v7_relativeSplatPath: true,
-            }}
-          />
-        )}
+        <SidebarProvider>
+          {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
+          <AnimatedBackground />
+          {!showSplash && (
+            <RouterProvider
+              router={router}
+              future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+              }}
+            />
+          )}
+        </SidebarProvider>
       </UserProfileProvider>
     </AuthProvider>
   );

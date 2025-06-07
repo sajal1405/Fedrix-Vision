@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserProfileContext } from "../context/UserProfileContext";
 import { AuthContext } from "../context/AuthContext";
+import { SidebarContext } from "../context/SidebarContext";
 import { motion } from "framer-motion";
 import KanbanBoard from "../components/kanban/KanbanBoard.jsx";
 import Calendar from "../components/calendar/Calendar.jsx";
@@ -10,6 +11,7 @@ import modulesData from "../data/roles.json";
 const Dashboard = () => {
   const { profile } = useContext(UserProfileContext);
   const { user } = useContext(AuthContext);
+  const { isOpen } = useContext(SidebarContext);
   const firstName = profile?.name?.split(" ")[0] || "User";
 
   const role = user?.role || "guest";
@@ -17,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-wrapper">
-      <div className="dashboard-main">
+      <div className={`dashboard-main ${isOpen ? 'ml-[220px]' : 'ml-0'}`}>
         <div className="dashboard-content space-y-10">
 
           <motion.div
