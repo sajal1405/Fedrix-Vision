@@ -24,6 +24,14 @@ const UserMenu = () => {
   return (
     <div>
       <button onClick={() => setOpen(!open)} data-testid="menu-toggle">
+        {profile.avatar && (
+          <img
+            src={profile.avatar}
+            alt="avatar"
+            className="w-6 h-6 rounded-full inline-block mr-2"
+            data-testid="avatar-img"
+          />
+        )}
         {profile.name}
       </button>
       {open && (
