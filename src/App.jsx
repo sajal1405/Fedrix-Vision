@@ -105,12 +105,10 @@ const App = () => {
           {
             path: '/dashboard/agent',
             element: (
-
-              <ProtectedRoute requiredRole="agent">
-
-                  <DashboardLayout>
-                    <AgentAIDashboard />
-                  </DashboardLayout>
+              <ProtectedRoute requiredRole="admin">
+                <DashboardLayout>
+                  <AgentAIDashboard />
+                </DashboardLayout>
               </ProtectedRoute>
             ),
           },
