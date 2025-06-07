@@ -36,6 +36,12 @@ key. The app expects the following variables:
 - `REACT_APP_SUPABASE_ANON_KEY` – the public anon key
 - `REACT_APP_HF_API_URL` – optional HuggingFace inference endpoint used by the AI agent's `generateContent` function
 
+Before launching the dashboard, run the migration that creates the `reminders` table to avoid `404` errors when fetching reminders:
+
+```bash
+psql < supabase/create_reminders_table.sql
+```
+
 ### 🚀 Development
 
 #### Web
