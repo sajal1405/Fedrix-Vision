@@ -113,6 +113,11 @@ SQL for the analytics tables lives in `supabase/create_analytics_tables.sql`. Ru
 psql < supabase/create_analytics_tables.sql
 ```
 
+Create the reminders table as well:
+```bash
+psql < supabase/create_reminders_table.sql
+```
+
 
 
 ### Continuous Integration
