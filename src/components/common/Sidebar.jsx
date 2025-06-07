@@ -10,10 +10,10 @@ import {
 } from "react-icons/hi";
 
 const Sidebar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const { logoutProfile, profile } = useContext(UserProfileContext);
   const navigate = useNavigate();
-  const tier = profile?.tier || "client";
+  const tier = profile?.tier || user?.role || "client";
 
   const handleLogout = () => {
     logout();
