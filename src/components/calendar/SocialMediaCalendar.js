@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import moment from "moment";
 import { supabase } from "../../supabaseClient";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -11,6 +11,17 @@ const SocialMediaCalendar = () => {
   const [platform, setPlatform] = useState("");
   const [project, setProject] = useState("");
 
+  const fetchPosts = useCallback(async () => {
+    const { data } = await supabase
+      .from("scheduled_posts")
+      .select("*")
+      .order("date", { ascending: true });
+
+    const visible =
+      profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
+    setPosts(visible);
+  }, [profile?.id, profile?.tier]);
+
   useEffect(() => {
     if (!user?.email) return;
     fetchPosts();
@@ -21,14 +32,7 @@ const SocialMediaCalendar = () => {
       .subscribe();
 
     return () => supabase.removeChannel(channel);
-  }, [user?.email, profile?.id]);
-
-  const fetchPosts = async () => {
-    const { data } = await supabase.from("scheduled_posts").select("*").order("date", { ascending: true });
-
-    const visible = profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
-    setPosts(visible);
-  };
+  }, [user?.email, profile?.id, fetchPosts]);
 
   const filtered = posts.filter(
     (p) =>

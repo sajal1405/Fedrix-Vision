@@ -18,7 +18,7 @@ const ClientDashboard = () => {
         <Header />
         <section className="dashboard-content fade-in">
           <h2>Hello, Client</h2>
-          <p>Here's your personalized dashboard overview.</p>
+          <p>Here&apos;s your personalized dashboard overview.</p>
         </section>
 
         <section className="dashboard-content fade-in">
