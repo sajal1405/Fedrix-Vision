@@ -22,6 +22,7 @@ import { SidebarProvider } from "./context/SidebarContext";
 import DashboardLayout from "./components/common/DashboardLayout.jsx";
 import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 import { AgentAIProvider } from "./context/AgentAIContext";
+import Reminders from "./pages/Reminders.jsx";
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
