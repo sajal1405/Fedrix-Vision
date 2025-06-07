@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
+import AgentDashboard from "./pages/AgentDashboard.jsx";
 import UserManagement from "./components/admin/UserManagement.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -96,6 +97,16 @@ const App = () => {
               <ProtectedRoute>
                 <DashboardLayout>
                   <BlogManagement />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/agent',
+            element: (
+              <ProtectedRoute requiredRole="agent">
+                <DashboardLayout>
+                  <AgentDashboard />
                 </DashboardLayout>
               </ProtectedRoute>
             ),
