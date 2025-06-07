@@ -134,7 +134,7 @@ const UserManagement = () => {
         </div>
         <button
           type="submit"
-          className="bg-fedrix hover:bg-purple-800 text-white px-4 py-2 rounded-md"
+          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
         >
           Create User
         </button>

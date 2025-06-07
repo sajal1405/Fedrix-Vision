@@ -112,7 +112,7 @@ const KanbanBoard = () => {
             setEditingTask(null);
             setShowModal(true);
           }}
-          className="ml-auto bg-fedrix text-white px-4 py-2 rounded-md text-sm"
+          className="ml-auto bg-gray-700 text-white px-4 py-2 rounded-md text-sm"
         >
           + New Task
         </button>
@@ -159,7 +159,7 @@ const KanbanColumn = ({ name, items, onDrop, onEdit, onDelete }) => {
     <motion.div
       ref={dropRef}
       className={`bg-white/5 border border-white/10 rounded-xl p-4 min-h-[300px] ${
-        isOver ? "bg-fedrix/10" : ""
+        isOver ? "bg-gray-700/10" : ""
       }`}
       whileHover={{ scale: 1.01 }}
     >

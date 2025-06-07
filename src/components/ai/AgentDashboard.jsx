@@ -85,7 +85,7 @@ const AgentDashboard = () => {
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-fedrix rounded-md hover:bg-purple-700 disabled:opacity-50"
+          className="px-6 py-2 bg-gray-700 rounded-md hover:bg-gray-600 disabled:opacity-50"
         >
           {loading ? "Generating..." : "Generate"}
         </button>
@@ -106,7 +106,7 @@ const AgentDashboard = () => {
                 </div>
                 <button
                   onClick={() => handleApprove(d)}
-                  className="bg-fedrix px-3 py-1 rounded-md text-sm hover:bg-purple-700"
+                  className="bg-gray-700 px-3 py-1 rounded-md text-sm hover:bg-gray-600"
                 >
                   Approve
                 </button>

@@ -27,7 +27,7 @@ const BlogList = ({ posts, onEdit, onDelete }) => {
               className="bg-white/5 border border-white/10 p-5 rounded-lg backdrop-blur-sm shadow-md"
             >
               <h4
-                className="text-white font-semibold text-lg cursor-pointer hover:text-fedrix"
+                className="text-white font-semibold text-lg cursor-pointer hover:text-gray-300"
                 onClick={() => setPreviewPost(post)}
               >
                 {post.title}
@@ -40,7 +40,7 @@ const BlogList = ({ posts, onEdit, onDelete }) => {
                 <div className="mt-4 flex gap-4">
                   <button
                     onClick={() => onEdit(post)}
-                    className="px-4 py-2 bg-fedrix text-white text-sm rounded-md hover:bg-purple-700"
+                    className="px-4 py-2 bg-gray-700 text-white text-sm rounded-md hover:bg-gray-600"
                   >
                     Edit
                   </button>

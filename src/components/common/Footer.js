@@ -28,7 +28,7 @@ const footerStyle = {
 };
 
 const linkStyle = {
-  color: "#6f0c8a",
+  color: "#444",
   fontWeight: 500,
   textDecoration: "none",
 };

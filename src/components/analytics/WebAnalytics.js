@@ -26,7 +26,7 @@ const WebAnalytics = () => {
       {
         label: "Page Visits",
         data: rows.map((r) => r.visits),
-        backgroundColor: "#6f0c8a",
+        backgroundColor: "#444",
       },
     ],
   };

@@ -47,7 +47,7 @@ const Profile = () => {
           </p>
         )}
       </div>
-      <Link to="/dashboard/settings" className="text-fedrix mt-4 inline-block">
+      <Link to="/dashboard/settings" className="text-gray-300 mt-4 inline-block">
         Edit Profile
       </Link>
     </motion.div>

@@ -43,7 +43,7 @@ const Sidebar = () => {
       }`}
     >
       <div className="text-center mb-10">
-        <h1 className="text-fedrix text-xl font-bold">Fedrix Vision</h1>
+        <h1 className="text-gray-300 text-xl font-bold">Fedrix Vision</h1>
         <p className="text-white/40 text-xs mt-1">Welcome, {profile?.name?.split(" ")[0]}</p>
       </div>
 
@@ -57,8 +57,8 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2 rounded-md transition-all text-white ${
                   isActive
-                    ? "bg-fedrix font-semibold shadow-md"
-                    : "hover:bg-white/10 hover:text-fedrix"
+                    ? "bg-gray-700 font-semibold shadow-md"
+                    : "hover:bg-white/10 hover:text-gray-300"
                 }`
               }
             >

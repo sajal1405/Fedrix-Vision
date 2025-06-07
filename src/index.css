@@ -14,7 +14,7 @@ body {
 
 /* Links */
 a {
-  @apply text-fedrix transition;
+  @apply text-gray-300 transition;
 }
 a:hover {
   @apply text-white;
@@ -48,17 +48,17 @@ textarea {
 /* Buttons */
 button,
 .btn-primary {
-  @apply bg-fedrix text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
+  @apply bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
 }
 
 button:hover,
 .btn-primary:hover {
-  @apply bg-purple-700;
+  @apply bg-gray-600;
 }
 
 /* Avatar */
 .avatar-img {
-  @apply w-20 h-20 rounded-full object-cover bg-black p-1 border-2 border-fedrix mb-4;
+  @apply w-20 h-20 rounded-full object-cover bg-black p-1 border-2 border-gray-700 mb-4;
 }
 
 /* Footer */

@@ -11,7 +11,7 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
   const [status, setStatus] = useState("To Do");
   const [priority, setPriority] = useState("Medium");
   const [customTag, setCustomTag] = useState("");
-  const [customColor, setCustomColor] = useState("#6f0c8a");
+  const [customColor, setCustomColor] = useState("#444");
 
   useEffect(() => {
     if (taskToEdit) {
@@ -21,7 +21,7 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
       setStatus(taskToEdit.status);
       setPriority(taskToEdit.priority || "Medium");
       setCustomTag(taskToEdit.custom_tag || "");
-      setCustomColor(taskToEdit.custom_color || "#6f0c8a");
+      setCustomColor(taskToEdit.custom_color || "#444");
     } else {
       setTitle("");
       setDescription("");
@@ -29,7 +29,7 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
       setStatus("To Do");
       setPriority("Medium");
       setCustomTag("");
-      setCustomColor("#6f0c8a");
+      setCustomColor("#444");
     }
   }, [taskToEdit]);
 
@@ -150,7 +150,7 @@ const TaskModal = ({ isOpen, onClose, onSaved, taskToEdit }) => {
             </button>
             <button
               type="submit"
-              className="bg-fedrix text-white px-6 py-2 rounded-md hover:bg-purple-800 transition"
+              className="bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
             >
               {taskToEdit ? "Update" : "Create"}
             </button>

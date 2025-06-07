@@ -9,7 +9,7 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
   const [project, setProject] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [tag, setTag] = useState("");
-  const [tagColor, setTagColor] = useState("#6f0c8a");
+  const [tagColor, setTagColor] = useState("#444");
   const [type, setType] = useState("meeting");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -23,7 +23,7 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
       setProject(event.project || "");
       setPriority(event.priority || "Medium");
       setTag(event.tag || "");
-      setTagColor(event.tag_color || "#6f0c8a");
+      setTagColor(event.tag_color || "#444");
       setType(event.type || "meeting");
     } else if (slot?.start) {
       const startTime = new Date(slot.start).toISOString().slice(0, 16);
@@ -153,7 +153,7 @@ const EventModal = ({ slot, event, onClose, onSave }) => {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-fedrix hover:bg-purple-700 text-white rounded-md font-medium"
+              className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md font-medium"
             >
               Save Event
             </button>

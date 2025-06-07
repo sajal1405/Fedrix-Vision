@@ -63,7 +63,7 @@ const BlogEditor = ({ selectedPost, onSave, onCancel }) => {
           <div className="flex gap-4">
             <button
               type="submit"
-              className="bg-fedrix hover:bg-purple-700 text-white px-5 py-2 rounded-md transition"
+              className="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-md transition"
             >
               Save
             </button>
