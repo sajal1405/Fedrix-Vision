@@ -74,6 +74,20 @@ npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
 
+### Database Migration
+If you already have a Supabase project set up, add the new `type` column to the
+`events` table before running the updated application:
+
+```sql
+alter table events add column type text not null default 'meeting';
+```
+
+With the [Supabase CLI](https://supabase.com/docs/guides/cli), you can run:
+
+```bash
+supabase db query "alter table events add column type text not null default 'meeting';"
+```
+
 ### 🤖 AI Agent
 The Agent dashboard uses a public HuggingFace endpoint to generate draft social posts.
 Set `REACT_APP_HF_API_URL` if you wish to point to a different model or self-hosted endpoint. This value is read by the context when calling `generateContent`.
