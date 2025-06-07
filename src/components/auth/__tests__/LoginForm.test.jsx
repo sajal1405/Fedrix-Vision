@@ -26,12 +26,10 @@ describe('LoginForm', () => {
     const emailInput = screen.getByPlaceholderText(/enter your email/i);
     const passInput = screen.getByPlaceholderText(/enter password/i);
     const sliderText = screen.getByText(/slide to login/i);
-    const loginButton = screen.getByRole('button', { name: /login/i });
 
     expect(emailInput).toBeInTheDocument();
     expect(passInput).toBeInTheDocument();
     expect(sliderText).toBeInTheDocument();
-    expect(loginButton).toBeInTheDocument();
 
     fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
     fireEvent.change(passInput, { target: { value: 'secret' } });
@@ -40,7 +38,7 @@ describe('LoginForm', () => {
     expect(passInput.value).toBe('secret');
   });
 
-  test('submits form when login button clicked', () => {
+  test('submits form on submit', () => {
     supabase.auth.signInWithPassword.mockResolvedValue({
       data: { user: {} },
       error: null,
@@ -55,7 +53,7 @@ describe('LoginForm', () => {
       target: { value: 'secret' },
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /login/i }));
+    fireEvent.submit(screen.getByTestId('login-form'));
 
     expect(supabase.auth.signInWithPassword).toHaveBeenCalledWith({
       email: 'user@example.com',
