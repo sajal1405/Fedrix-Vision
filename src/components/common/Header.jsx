@@ -1,22 +1,12 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { UserProfileContext } from "../../context/UserProfileContext";
 import { motion } from "framer-motion";
-import { supabase } from "../../supabaseClient";
+import { UserProfileContext } from "../../context/UserProfileContext";
+import UserMenu from "./UserMenu.jsx";
 
 const Header = () => {
-  const { logout, user } = useContext(AuthContext);
-  const { profile, logoutProfile } = useContext(UserProfileContext);
-  const navigate = useNavigate();
-  const tier = profile?.tier || user?.role || "client";
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    logout();
-    logoutProfile();
-    navigate("/login");
-  };
+  const { profile } = useContext(UserProfileContext);
+
 
   return (
     <motion.header
@@ -34,23 +24,7 @@ const Header = () => {
         <div className="text-white/80 text-xs bg-fedrix/10 px-3 py-1 rounded-full border border-fedrix uppercase tracking-wide">
           {tier}
         </div>
-
-        {/* Avatar */}
-        {profile?.avatar && (
-          <img
-            src={profile.avatar}
-            alt="avatar"
-            className="w-10 h-10 rounded-full border-2 border-fedrix shadow-lg object-cover"
-          />
-        )}
-
-        {/* Logout */}
-        <button
-          onClick={handleLogout}
-          className="text-white/60 text-xs border border-white/20 px-3 py-1 rounded-md hover:bg-fedrix/10 hover:text-white transition-all"
-        >
-          Logout
-        </button>
+        <UserMenu />
       </div>
     </motion.header>
   );
