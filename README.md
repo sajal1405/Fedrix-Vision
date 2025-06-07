@@ -113,6 +113,12 @@ SQL for the analytics tables lives in `supabase/create_analytics_tables.sql`. Ru
 psql < supabase/create_analytics_tables.sql
 ```
 
+SQL for the reminders table lives in `supabase/create_reminders_table.sql`. **Make sure to run this migration** or the app will return `404` errors when trying to fetch reminders:
+
+```bash
+psql < supabase/create_reminders_table.sql
+```
+
 
 ### Database Setup
 The application requires the following tables inside your Supabase database:
@@ -120,7 +126,7 @@ The application requires the following tables inside your Supabase database:
 - `tasks` – no migration script included (create manually)
 - `posts` – no migration script included (create manually)
 - `scheduled_posts` – no migration script included (create manually)
-- `reminders` – no migration script included (create manually)
+- `reminders` – defined in `supabase/create_reminders_table.sql`
 - `events` – no migration script included (create manually)
 - `campaign_roi` – defined in `supabase/create_analytics_tables.sql`
 - `page_visits` – defined in `supabase/create_analytics_tables.sql`

@@ -16,6 +16,8 @@ const ReminderList = () => {
 
     if (error) {
       console.error("Failed to fetch reminders", error);
+      // If you receive a 404, ensure `supabase/create_reminders_table.sql` was run
+      // to create the table inside your project.
       setReminders([]);
       return;
     }
