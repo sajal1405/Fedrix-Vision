@@ -6,14 +6,15 @@ import {
   HiViewBoards,
   HiOutlineCalendar,
   HiOutlineNewspaper,
+  HiOutlineUsers,
   HiOutlineLogout,
 } from "react-icons/hi";
 
 const Sidebar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const { logoutProfile, profile } = useContext(UserProfileContext);
   const navigate = useNavigate();
-  const tier = profile?.tier || "client";
+  const tier = profile?.tier || user?.role || "client";
 
   const handleLogout = () => {
     logout();
@@ -26,6 +27,7 @@ const Sidebar = () => {
     { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "client", "superadmin"] },
     { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin", "superadmin"] },
     { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "superadmin"] },
+    { to: "/dashboard/users", icon: <HiOutlineUsers />, label: "Users", roles: ["superadmin"] },
   ];
 
   return (
