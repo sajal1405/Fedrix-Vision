@@ -9,6 +9,17 @@ const BlogManager = () => {
 
   useEffect(() => {
     fetchPosts();
+
+    const channel = supabase
+      .channel("posts-sync")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "posts" },
+        fetchPosts
+      )
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
   }, []);
 
   const fetchPosts = async () => {
