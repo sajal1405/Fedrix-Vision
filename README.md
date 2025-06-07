@@ -1,4 +1,5 @@
 # Fedrix Vision – Fullstack Digital Marketing Suite
+[![CI](https://github.com/your-org/fedrix-vision/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/fedrix-vision/actions/workflows/ci.yml)
 
 An enterprise-grade platform built for managing digital agency tasks:
 - 🔒 Supabase-backed auth, blog, kanban, calendar
@@ -70,3 +71,7 @@ Run all React tests once and exit:
 npm test
 ```
 The script runs `react-scripts test --watchAll=false` under the hood.
+
+### Continuous Integration
+
+A GitHub Actions workflow installs dependencies, lints the codebase and runs tests on every push and pull request.
