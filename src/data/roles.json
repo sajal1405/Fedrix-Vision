@@ -5,6 +5,7 @@
         { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },
         { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
         { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." },
+        { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." },
         { "id": "users", "label": "User Management", "desc": "Manage user accounts & roles." }
       ]
     },
@@ -12,12 +13,14 @@
       "modules": [
         { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },
         { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
-        { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." }
+        { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." },
+        { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." }
       ]
     },
     "client": {
       "modules": [
-        { "id": "kanban", "label": "Kanban Board", "desc": "Task updates & project overview." }
+        { "id": "kanban", "label": "Kanban Board", "desc": "Task updates & project overview." },
+        { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." }
       ]
     }
   }
