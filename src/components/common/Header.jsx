@@ -4,10 +4,8 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import UserMenu from "./UserMenu.jsx";
 
 const Header = () => {
-
   const { profile } = useContext(UserProfileContext);
-
-
+  const tier = profile?.tier || "guest";
   return (
     <motion.header
       className="w-full flex items-center justify-between px-8 py-4 border-b border-white/10 backdrop-blur-xl bg-white/5 z-20"
