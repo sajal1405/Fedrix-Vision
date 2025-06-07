@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
+import { SidebarContext } from "../../context/SidebarContext";
 import {
   HiViewBoards,
   HiOutlineCalendar,
@@ -13,6 +14,7 @@ import {
 const Sidebar = () => {
   const { logout, user } = useContext(AuthContext);
   const { logoutProfile, profile } = useContext(UserProfileContext);
+  const { isOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
   const tier = profile?.tier || user?.role || "client";
 
@@ -32,7 +34,9 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="fixed top-0 left-0 h-full w-56 bg-black border-r border-white/10 px-6 py-8 z-50 shadow-xl"
+      className={`fixed top-0 left-0 h-full bg-black border-r border-white/10 px-6 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
+        isOpen ? "w-56 translate-x-0" : "w-0 -translate-x-full"
+      }`}
       data-aos="fade-right"
     >
       <div className="text-center mb-10">

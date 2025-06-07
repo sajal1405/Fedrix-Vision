@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { HiMenuAlt3 } from "react-icons/hi";
 import { UserProfileContext } from "../../context/UserProfileContext";
+import { SidebarContext } from "../../context/SidebarContext";
 import UserMenu from "./UserMenu.jsx";
 
 const Header = () => {
   const { profile } = useContext(UserProfileContext);
+  const { toggleSidebar } = useContext(SidebarContext);
   const tier = profile?.tier || "guest";
   return (
     <motion.header
@@ -13,8 +16,13 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="text-lg font-bold text-fedrix tracking-wide">
-        Fedrix Vision
+      <div className="flex items-center gap-4">
+        <button onClick={toggleSidebar} className="text-white focus:outline-none">
+          <HiMenuAlt3 className="text-2xl" />
+        </button>
+        <div className="text-lg font-bold text-fedrix tracking-wide">
+          Fedrix Vision
+        </div>
       </div>
 
       <div className="flex items-center gap-4">
