@@ -9,13 +9,21 @@ const UserManagement = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("client");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const fetchUsers = async () => {
     const { data, error } = await supabase
       .from("profiles")
       .select("id, email, name, tier")
       .order("created_at", { ascending: false });
-    if (!error) setUsers(data || []);
+    if (error) {
+      console.error("Fetch users error", error);
+      setErrorMsg(error.message || "Failed to fetch users");
+      setUsers([]);
+    } else {
+      setErrorMsg("");
+      setUsers(data || []);
+    }
   };
 
   useEffect(() => {
@@ -31,31 +39,48 @@ const UserManagement = () => {
     });
     if (error) {
       console.error("Signup error", error);
+      setErrorMsg(error.message || "Signup failed");
       return;
     }
 
     const { user } = data;
-    await supabase.from("profiles").insert({
+    const { error: insertError } = await supabase.from("profiles").insert({
       id: user.id,
       email: user.email,
       tier: role,
     });
+    if (insertError) {
+      console.error("Profile insert error", insertError);
+      setErrorMsg(insertError.message || "Failed to create profile");
+      return;
+    }
 
     setEmail("");
     setPassword("");
     setRole("client");
+    setErrorMsg("");
     fetchUsers();
   };
 
   const updateRole = async (id, newRole) => {
-    await supabase.from("profiles").update({ tier: newRole }).eq("id", id);
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({ tier: newRole })
+      .eq("id", id);
+    if (updateError) {
+      console.error("Update role error", updateError);
+      setErrorMsg(updateError.message || "Failed to update role");
+      return;
+    }
     try {
       await supabase.auth.admin.updateUserById(id, {
         user_metadata: { role: newRole },
       });
     } catch (err) {
       console.error(err);
+      setErrorMsg(err.message || "Failed to update auth role");
     }
+    setErrorMsg("");
     fetchUsers();
   };
 
@@ -68,6 +93,11 @@ const UserManagement = () => {
       <h2 className="text-white text-2xl font-bold flex items-center gap-2">
         👥 User Management
       </h2>
+      {errorMsg && (
+        <div className="text-red-400 bg-white/5 border border-red-400/50 p-2 rounded-md">
+          {errorMsg}
+        </div>
+      )}
       <form
         onSubmit={handleCreate}
         className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-4"

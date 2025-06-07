@@ -3,12 +3,15 @@ jest.mock('../../../supabaseClient', () => ({ supabase: { auth: { signInWithPass
 import { render, screen, fireEvent } from '@testing-library/react';
 import LoginForm from '../LoginForm';
 import { AuthContext } from '../../../context/AuthContext';
+import { UserProfileContext } from '../../../context/UserProfileContext';
 import { MemoryRouter } from 'react-router-dom';
 
 function renderWithProviders(ui) {
   return render(
     <AuthContext.Provider value={{ login: jest.fn() }}>
-      <MemoryRouter>{ui}</MemoryRouter>
+      <UserProfileContext.Provider value={{ saveProfile: jest.fn() }}>
+        <MemoryRouter>{ui}</MemoryRouter>
+      </UserProfileContext.Provider>
     </AuthContext.Provider>
   );
 }

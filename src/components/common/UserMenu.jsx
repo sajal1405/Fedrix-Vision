@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { UserProfileContext } from '../../context/UserProfileContext';
 
 const UserMenu = () => {
@@ -7,12 +9,14 @@ const UserMenu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  if (!profile) return null;
+  if (!profile?.name) {
+    return <Navigate to="/profile" replace />;
+  }
 
   return (
     <div>
       <button onClick={() => setOpen(!open)} data-testid="menu-toggle">
-        {profile.name || 'User'}
+        {profile.name}
       </button>
       {open && (
         <ul data-testid="menu-list">

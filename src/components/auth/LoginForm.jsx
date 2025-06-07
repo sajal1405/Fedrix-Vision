@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { supabase } from "../../supabaseClient";
 const logo = "/fedrix.svg";
 import { AuthContext } from "../../context/AuthContext";
+import { UserProfileContext } from "../../context/UserProfileContext";
 
 const LoginForm = () => {
   const sliderRef = useRef(null);
@@ -21,6 +22,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
+  const { saveProfile } = useContext(UserProfileContext);
 
   const handleLogin = useCallback(async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -44,8 +46,20 @@ const LoginForm = () => {
     }
 
     login(role, user.email);
-    navigate("/dashboard");
-  }, [email, password, login, navigate]);
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+    if (profile && !profileError) {
+      saveProfile(profile);
+      navigate("/dashboard");
+    } else {
+      navigate("/profile");
+    }
+  }, [email, password, login, navigate, saveProfile]);
 
   useEffect(() => {
     const knob = knobRef.current;
