@@ -20,7 +20,7 @@ function renderWithRole(role) {
                 <Route
                   path="/dashboard/agent"
                   element={
-                    <ProtectedRoute requiredRole="agent">
+                    <ProtectedRoute requiredRole="admin">
                       <AgentDashboard />
                     </ProtectedRoute>
                   }
@@ -37,7 +37,7 @@ function renderWithRole(role) {
 
 describe('AgentDashboard route', () => {
   test('loads when user has access and shows generated content', () => {
-    renderWithRole('agent');
+    renderWithRole('admin');
     expect(screen.getByText('Agent Dashboard')).toBeInTheDocument();
     expect(screen.getByTestId('generated-content')).toHaveTextContent('Generated content');
   });
