@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types"; // eslint-disable-line no-unused-vars
 import { supabase } from "../../supabaseClient";
 import { motion } from "framer-motion";
 
@@ -173,5 +174,7 @@ const UserManagement = () => {
     </motion.div>
   );
 };
+
+UserManagement.propTypes = {};
 
 export default UserManagement;
