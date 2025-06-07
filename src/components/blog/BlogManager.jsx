@@ -6,6 +6,7 @@ import { supabase } from "../../supabaseClient";
 const BlogManager = () => {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     fetchPosts();
@@ -23,28 +24,55 @@ const BlogManager = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const { data } = await supabase.from("posts").select("*");
-    if (data) setPosts(data);
+    try {
+      const { data, error } = await supabase.from("posts").select("*");
+      if (error) throw error;
+      if (data) setPosts(data);
+      setErrorMsg("");
+    } catch (err) {
+      console.error("Fetch posts error", err);
+      setErrorMsg(err.message || "Failed to fetch posts");
+    }
   };
 
   const handleSave = async (post) => {
-    if (selectedPost) {
-      await supabase.from("posts").update(post).eq("id", selectedPost.id);
-    } else {
-      await supabase.from("posts").insert(post);
+    try {
+      if (selectedPost) {
+        const { error } = await supabase.from("posts").update(post).eq("id", selectedPost.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from("posts").insert(post);
+        if (error) throw error;
+      }
+      fetchPosts();
+      setSelectedPost(null);
+      setErrorMsg("");
+    } catch (err) {
+      console.error("Save post error", err);
+      setErrorMsg(err.message || "Failed to save post");
     }
-    fetchPosts();
-    setSelectedPost(null);
   };
 
   const handleEdit = (post) => setSelectedPost(post);
   const handleDelete = async (post) => {
-    await supabase.from("posts").delete().eq("id", post.id);
-    fetchPosts();
+    try {
+      const { error } = await supabase.from("posts").delete().eq("id", post.id);
+      if (error) throw error;
+      fetchPosts();
+      setErrorMsg("");
+    } catch (err) {
+      console.error("Delete post error", err);
+      setErrorMsg(err.message || "Failed to delete post");
+    }
   };
 
   return (
     <div className="space-y-8">
+      {errorMsg && (
+        <div className="text-red-400 bg-white/5 border border-red-400/50 p-2 rounded-md">
+          {errorMsg}
+        </div>
+      )}
       <BlogEditor
         selectedPost={selectedPost}
         onSave={handleSave}
