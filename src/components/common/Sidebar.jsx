@@ -41,7 +41,6 @@ const Sidebar = () => {
       className={`fixed top-0 left-0 h-full bg-black border-r border-white/10 px-6 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
         isOpen ? "w-56 translate-x-0" : "w-0 -translate-x-full"
       }`}
-      data-aos="fade-right"
     >
       <div className="text-center mb-10">
         <h1 className="text-fedrix text-xl font-bold">Fedrix Vision</h1>
