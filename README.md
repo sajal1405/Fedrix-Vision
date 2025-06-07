@@ -62,3 +62,11 @@ Start the React Native packager inside the `mobile` folder:
 ```bash
 npm run mobile
 ```
+
+### Testing
+Run all React tests once and exit:
+
+```bash
+npm test
+```
+The script runs `react-scripts test --watchAll=false` under the hood.
