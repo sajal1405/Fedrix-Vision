@@ -11,6 +11,8 @@ import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
 import UserManagement from "./components/admin/UserManagement.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
+import Profile from "./pages/Profile.jsx";
+import ProfileSettings from "./pages/ProfileSettings.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import { UserProfileProvider } from "./context/UserProfileContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -37,6 +39,34 @@ const App = () => {
           {
             path: '/profile',
             element: <ProfileSetup />,
+          },
+          {
+            path: '/dashboard/profile',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <Profile />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/settings',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <ProfileSettings />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
           },
           {
             path: '/dashboard',

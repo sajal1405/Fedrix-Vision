@@ -1,7 +1,8 @@
 // src/context/UserProfileContext.js
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { supabase } from "../supabaseClient";
 
 export const UserProfileContext = createContext();
 
@@ -20,6 +21,25 @@ export const UserProfileProvider = ({ children }) => {
     localStorage.removeItem("fedrix_profile");
     setProfile(null);
   };
+
+  useEffect(() => {
+    const load = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+      if (data) {
+        localStorage.setItem("fedrix_profile", JSON.stringify(data));
+        setProfile(data);
+      }
+    };
+    if (!profile) load();
+  }, []); // run once on mount
 
   return (
     <UserProfileContext.Provider value={{ profile, saveProfile, logoutProfile }}>
