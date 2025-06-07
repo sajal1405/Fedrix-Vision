@@ -4,7 +4,9 @@ import { UserProfileContext } from "../../context/UserProfileContext";
 import UserMenu from "./UserMenu.jsx";
 
 const Header = () => {
+
   const { profile } = useContext(UserProfileContext);
+
 
   return (
     <motion.header
@@ -20,7 +22,7 @@ const Header = () => {
       <div className="flex items-center gap-4">
         {/* Tier badge */}
         <div className="text-white/80 text-xs bg-fedrix/10 px-3 py-1 rounded-full border border-fedrix uppercase tracking-wide">
-          {profile?.tier || "client"}
+          {tier}
         </div>
         <UserMenu />
       </div>
