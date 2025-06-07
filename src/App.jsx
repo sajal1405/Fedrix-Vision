@@ -10,6 +10,7 @@ import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
+import ProfileSettings from "./pages/ProfileSettings.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import { UserProfileProvider } from "./context/UserProfileContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -88,6 +89,20 @@ const App = () => {
                   <div className="flex flex-col flex-1">
                     <Header />
                     <BlogManagement />
+                  </div>
+                </>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/settings',
+            element: (
+              <ProtectedRoute>
+                <>
+                  <Sidebar />
+                  <div className="flex flex-col flex-1">
+                    <Header />
+                    <ProfileSettings />
                   </div>
                 </>
               </ProtectedRoute>
