@@ -20,36 +20,36 @@ const Dashboard = () => {
               value="12"
               description="Active"
               icon={CheckSquareIcon}
-              gradient="from-pink-700/60 to-pink-900/60"
+              gradient="from-fuchsia-600/60 to-pink-800/60"
             />
             <StatCard
               title="Clients"
               value="8"
               description="Engaged"
               icon={UsersIcon}
-              gradient="from-purple-700/60 to-purple-900/60"
+              gradient="from-violet-600/60 to-indigo-800/60"
             />
             <StatCard
               title="Revenue"
               value="$24k"
               description="This Month"
               icon={DollarSignIcon}
-              gradient="from-amber-600/60 to-amber-800/60"
+              gradient="from-emerald-600/60 to-teal-800/60"
             />
             <StatCard
               title="Rating"
               value="4.9"
               description="Average"
               icon={StarIcon}
-              gradient="from-teal-700/60 to-teal-900/60"
+              gradient="from-orange-600/60 to-amber-800/60"
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-stretch">
             <div className="lg:col-span-2">
-              <AIChatWidget />
+              <AIChatWidget className="h-full" />
             </div>
-            <RecentActivityFeed />
+            <RecentActivityFeed className="h-full" />
           </div>
 
       <KanbanWidget />

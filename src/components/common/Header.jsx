@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { HiMenuAlt3, HiChevronDown } from "react-icons/hi";
+import { HiChevronDown } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 import { UserProfileContext } from "../../context/UserProfileContext";
-import { SidebarContext } from "../../context/SidebarContext";
 import UserProfileDropdown from "./UserProfileDropdown.jsx";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import { useAuth } from "../../context/AuthContext";
@@ -15,7 +14,6 @@ const Header = () => {
   const { profile, logoutProfile } = useContext(UserProfileContext);
   const location = useLocation();
 
-  const { toggleSidebar } = useContext(SidebarContext);
   const { logout } = useAuth();
   const navigate = useNavigate();
   const tier = profile?.role || "guest";
@@ -57,11 +55,11 @@ const Header = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="flex items-center gap-4">
-        <button onClick={toggleSidebar} className="text-white focus:outline-none">
-          <HiMenuAlt3 className="text-2xl" />
-        </button>
-        <img src={logo} alt="Fedrix" className="h-6 w-6" />
-        <span className="text-white font-semibold">Vision Suite</span>
+        <img src={logo} alt="Fedrix" className="h-8 w-8" />
+        <span className="font-semibold">
+          <span className="text-transparent bg-gradient-to-r from-cyan-300 to-teal-400 bg-clip-text">Vision</span>{' '}
+          <span className="text-white">Suite</span>
+        </span>
         <HologramTitle title={title} />
       </div>
 
@@ -86,7 +84,7 @@ const Header = () => {
                 className="w-6 h-6 rounded-full object-cover"
               />
             )}
-            <span className="whitespace-nowrap">{profile?.name}</span>
+            <span className="whitespace-nowrap">{profile?.full_name || profile?.name || profile?.email}</span>
             <HiChevronDown className="text-white" />
           </button>
           {openProfile && (

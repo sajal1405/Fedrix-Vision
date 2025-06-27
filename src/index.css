@@ -81,3 +81,12 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* Reusable tile styles */
+.glassy-tile {
+  @apply backdrop-blur-lg border border-white/10 bg-white/5 rounded-xl;
+}
+
+.hologram-tile {
+  @apply backdrop-blur-lg border border-white/10 bg-black/20 rounded-xl;
+}

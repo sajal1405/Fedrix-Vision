@@ -33,7 +33,7 @@ const Sidebar = () => {
     <aside
       onMouseEnter={openSidebar}
       onMouseLeave={closeSidebar}
-      className={`fixed left-0 top-16 bottom-12 bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
+      className={`fixed left-0 top-20 bottom-12 bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
         isOpen ? "w-56" : "w-20"
       }`}
     >
@@ -51,8 +51,8 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2 rounded-md transition-all text-white ${
                   isActive
-                    ? "bg-gray-700 font-semibold shadow-md"
-                    : "hover:bg-white/10 hover:text-gray-300"
+                    ? 'bg-gradient-to-r from-cyan-600 to-teal-600 font-semibold shadow-md'
+                    : 'hover:bg-white/10 hover:text-gray-300'
                 }`
               }
             >
