@@ -93,7 +93,7 @@ const AIChatWidget = ({ className }) => {
 
   return (
     <div
-      className={`glassy-tile p-6 flex flex-col ${className || ''}
+      className={`glassy-tile rounded-xl shadow-2xl min-h-[420px] p-6 flex flex-col ${className || ''}
                     bg-gradient-to-br from-cyan-900/60 via-blue-900/30 to-cyan-800/50`}
     >
       <h3 className="text-lg font-semibold text-white/80 mb-4 pb-2 border-b border-indigo-600/30 flex items-center justify-between">
