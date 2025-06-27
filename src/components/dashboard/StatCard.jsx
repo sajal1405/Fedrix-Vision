@@ -76,35 +76,42 @@ const StarIcon = (props) => (
   </svg>
 );
 
-const StatCard = ({ title, value, description, icon: Icon, className }) => {
+const StatCard = ({
+  title,
+  value,
+  description,
+  icon: Icon,
+  className,
+  gradient = "from-cyan-700/60 to-cyan-900/60",
+}) => {
   return (
     <motion.div
-      className={`hologram-tile py-4 px-5 flex flex-col justify-between items-start rounded-xl shadow-lg border border-mid-gray
+      className={`hologram-tile py-4 px-5 flex items-center rounded-xl shadow-lg border border-mid-gray
                   transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-teal-500
-                  bg-gradient-to-br from-dark-gray/60 to-black-ops/60 group ${className}`}
-      whileHover={{ y: -3, scale: 1.01 }} // Subtle lift and scale on hover
+                  bg-gradient-to-br ${gradient} group ${className}`}
+      whileHover={{ y: -3, scale: 1.01 }}
     >
-      <div className="flex items-center justify-between w-full mb-1">
+      {Icon && (
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0.7 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex-shrink-0 mr-4"
+        >
+          <Icon className="text-white opacity-80 group-hover:opacity-100 transition-opacity duration-300 w-8 h-8" />
+        </motion.div>
+      )}
+      <div className="flex flex-col">
         <h3 className="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-wide">
           {title}
         </h3>
-        {Icon && (
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0.7 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex-shrink-0"
-          >
-            <Icon className="text-teal-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
-          </motion.div>
-        )}
+        <p className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
+          {value}
+        </p>
+        <p className="text-[10px] sm:text-xs text-light-gray leading-tight">
+          {description}
+        </p>
       </div>
-      <p className="text-2xl sm:text-3xl font-extrabold text-white mb-1">
-        {value}
-      </p>
-      <p className="text-[10px] sm:text-xs text-light-gray leading-tight">
-        {description}
-      </p>
     </motion.div>
   );
 };
@@ -115,6 +122,7 @@ StatCard.propTypes = {
   description: PropTypes.string.isRequired,
   icon: PropTypes.elementType.isRequired,
   className: PropTypes.string,
+  gradient: PropTypes.string,
 };
 
 export { StatCard, DollarSignIcon, UsersIcon, CheckSquareIcon, StarIcon };
