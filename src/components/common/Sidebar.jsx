@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
@@ -12,7 +13,7 @@ import {
   HiOutlineBell,
 } from "react-icons/hi";
 
-const Sidebar = () => {
+const Sidebar = ({ headerHeight = 0, footerHeight = 0 }) => {
   const { user } = useContext(AuthContext);
   const { profile } = useContext(UserProfileContext);
   const { isOpen, openSidebar, closeSidebar } = useContext(SidebarContext);
@@ -33,13 +34,11 @@ const Sidebar = () => {
     <aside
       onMouseEnter={openSidebar}
       onMouseLeave={closeSidebar}
-      className={`fixed left-0 top-20 bottom-12 bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
+      style={{ top: headerHeight, bottom: footerHeight }}
+      className={`fixed left-0 bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
         isOpen ? "w-56" : "w-20"
       }`}
     >
-      <div className="text-center mb-10 whitespace-nowrap">
-        <h1 className="text-gray-300 text-xl font-bold">Fedrix Vision</h1>
-      </div>
 
       <nav className="flex flex-col space-y-4">
         {navItems
@@ -67,3 +66,8 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+Sidebar.propTypes = {
+  headerHeight: PropTypes.number,
+  footerHeight: PropTypes.number,
+};

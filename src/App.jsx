@@ -24,6 +24,12 @@ import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 import { AgentAIProvider } from "./context/AgentAIContext";
 import Reminders from "./pages/Reminders.jsx";
 import { NotificationsProvider } from "./context/NotificationsContext";
+import AnalyticsPage from "./pages/AnalyticsPage.jsx";
+import SocialCalendar from "./pages/SocialCalendar.jsx";
+import ApiKeysPage from "./pages/ApiKeysPage.jsx";
+import ToolsPage from "./pages/ToolsPage.jsx";
+import AppSettings from "./pages/AppSettings.jsx";
+import Unauthorized from "./pages/Unauthorized.jsx";
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -139,6 +145,60 @@ const App = () => {
                 </DashboardLayout>
               </ProtectedRoute>
             ),
+          },
+          {
+            path: '/dashboard/analytics',
+            element: (
+              <ProtectedRoute requiredRole="admin">
+                <DashboardLayout>
+                  <AnalyticsPage />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/social-calendar',
+            element: (
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <SocialCalendar />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/api-keys',
+            element: (
+              <ProtectedRoute requiredRole="admin">
+                <DashboardLayout>
+                  <ApiKeysPage />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/tools',
+            element: (
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <ToolsPage />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/app-settings',
+            element: (
+              <ProtectedRoute requiredRole="super_admin">
+                <DashboardLayout>
+                  <AppSettings />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/unauthorized',
+            element: <Unauthorized />,
           },
         ],
         {
