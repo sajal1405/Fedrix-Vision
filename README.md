@@ -52,6 +52,13 @@ has likely not been created in your Supabase project. Apply the migration using
 psql < supabase/create_reminders_table.sql
 ```
 
+If the development server fails with errors such as `Module not found: Can't resolve 'react-big-calendar'`, ensure all dependencies are installed by running:
+
+```bash
+npm install
+```
+
+
 ### 🚀 Development
 
 #### Web
