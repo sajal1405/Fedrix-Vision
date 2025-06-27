@@ -1,18 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { HiMenuAlt3, HiBell } from "react-icons/hi";
+import { HiMenuAlt3, HiChevronDown } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { SidebarContext } from "../../context/SidebarContext";
-import UserMenu from "./UserMenu.jsx";
+import UserProfileDropdown from "./UserProfileDropdown.jsx";
+import NotificationsDropdown from "./NotificationsDropdown.jsx";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import HologramTitle from "./HologramTitle.jsx";
 import logo from "../../assets/fedrix.svg";
 
 const Header = () => {
-  const { profile } = useContext(UserProfileContext);
+  const { profile, logoutProfile } = useContext(UserProfileContext);
   const location = useLocation();
 
   const { toggleSidebar } = useContext(SidebarContext);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
   const tier = profile?.role || "guest";
 
   const pageTitles = {
@@ -30,6 +35,14 @@ const Header = () => {
   const title = pageTitles[location.pathname] || "Fedrix Vision";
 
   const [dateTime, setDateTime] = useState(new Date());
+  const [openProfile, setOpenProfile] = useState(false);
+
+  const handleSignOut = () => {
+    logout();
+    logoutProfile();
+    navigate('/login');
+  };
+
 
   useEffect(() => {
     const t = setInterval(() => setDateTime(new Date()), 60000);
@@ -52,15 +65,37 @@ const Header = () => {
         <HologramTitle title={title} />
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 relative">
         <span className="text-xs text-white/80 font-mono">
           {dateTime.toLocaleString()}
         </span>
-        <HiBell className="text-xl text-white/80" />
+        <NotificationsDropdown />
+
         <div className="text-white/80 text-xs bg-gray-700/10 px-3 py-1 rounded-full border border-gray-700 uppercase tracking-wide">
           {tier}
         </div>
-        <UserMenu />
+        <div className="relative">
+          <button
+            onClick={() => setOpenProfile((o) => !o)}
+            className="flex items-center space-x-2 focus:outline-none"
+          >
+            {profile?.avatar && (
+              <img
+                src={profile.avatar}
+                alt="avatar"
+                className="w-6 h-6 rounded-full object-cover"
+              />
+            )}
+            <span className="whitespace-nowrap">{profile?.name}</span>
+            <HiChevronDown className="text-white" />
+          </button>
+          {openProfile && (
+            <UserProfileDropdown
+              signOut={handleSignOut}
+              onClose={() => setOpenProfile(false)}
+            />
+          )}
+        </div>
       </div>
     </motion.header>
   );

@@ -284,8 +284,8 @@ const RecentActivityFeed = ({ className }) => {
 
   return (
     <div
-      className={`hologram-tile p-6 flex flex-col ${className || ''}
-                    bg-gradient-to-br from-dark-gray/60 to-black-ops/60`}
+      className={`glassy-tile p-6 flex flex-col ${className || ''}
+                    bg-gradient-to-br from-teal-900/60 via-indigo-900/30 to-teal-800/50`}
     >
       <h3 className="text-lg font-semibold text-white/80 mb-4 pb-2 border-b border-blue-600/30">
         Recent Activity

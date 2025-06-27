@@ -33,7 +33,7 @@ const Sidebar = () => {
     <aside
       onMouseEnter={openSidebar}
       onMouseLeave={closeSidebar}
-      className={`fixed top-0 left-0 h-full bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
+      className={`fixed left-0 top-16 bottom-12 bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
         isOpen ? "w-56" : "w-20"
       }`}
     >

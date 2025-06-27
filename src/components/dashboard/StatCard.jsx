@@ -76,12 +76,20 @@ const StarIcon = (props) => (
   </svg>
 );
 
-const StatCard = ({ title, value, description, icon: Icon, className }) => {
+const StatCard = ({
+  title,
+  value,
+  description,
+  icon: Icon,
+  className,
+  gradient = "from-cyan-700/60 to-cyan-900/60",
+}) => {
   return (
     <motion.div
       className={`hologram-tile py-4 px-5 flex items-center rounded-xl shadow-lg border border-mid-gray
                   transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-teal-500
-                  bg-gradient-to-br from-cyan-700/60 to-cyan-900/60 group ${className}`}
+                  bg-gradient-to-br ${gradient} group ${className}`}
+
       whileHover={{ y: -3, scale: 1.01 }}
     >
       {Icon && (
@@ -115,6 +123,7 @@ StatCard.propTypes = {
   description: PropTypes.string.isRequired,
   icon: PropTypes.elementType.isRequired,
   className: PropTypes.string,
+  gradient: PropTypes.string,
 };
 
 export { StatCard, DollarSignIcon, UsersIcon, CheckSquareIcon, StarIcon };
