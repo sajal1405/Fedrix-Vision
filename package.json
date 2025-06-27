@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "electron": "concurrently \"npm start\" \"electron desktop\"",
     "mobile": "cd mobile && npx react-native start",
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .js,.jsx"
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .js,.jsx",
+    "deploy": "npm run build && npx serve -s build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",

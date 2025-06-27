@@ -176,3 +176,13 @@ psql < supabase/create_reminders_table.sql
 
 A GitHub Actions workflow installs dependencies, lints the codebase and runs tests on every push and pull request.
 
+### Deployment
+
+After configuring `.env` and setting up the Supabase database, build the production bundle and serve it locally:
+
+```bash
+npm run deploy
+```
+
+The command runs `npm run build` and launches a lightweight server using `serve`. The dashboard will be available on `http://localhost:3000` by default. You can also run `npm run electron` to start the desktop app against the same build.
+
