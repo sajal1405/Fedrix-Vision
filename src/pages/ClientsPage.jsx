@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import supabase from '../utils/supabase';
 import { useUserProfile } from '../context/UserProfileContext';
-import { FaPlus, FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt, FaEdit, FaUsers } from 'react-icons/fa';
 
 export default function ClientsPage() {
   const { userProfile } = useUserProfile();
@@ -10,6 +10,10 @@ export default function ClientsPage() {
   const [showModal, setShowModal] = useState(false);
   const [editClient, setEditClient] = useState(null);
   const [form, setForm] = useState({ name: '', website: '', notes: '' });
+  const [showUsers, setShowUsers] = useState(false);
+  const [userClient, setUserClient] = useState(null);
+  const [allUsers, setAllUsers] = useState([]);
+  const [assignedUsers, setAssignedUsers] = useState([]);
 
   const canEdit =
     userProfile?.role === 'admin' || userProfile?.role === 'super_admin';
@@ -37,6 +41,43 @@ export default function ClientsPage() {
     setEditClient(null);
     setForm({ name: '', website: '', notes: '' });
     setShowModal(true);
+  }
+
+  async function openUsers(c) {
+    setUserClient(c);
+    setShowUsers(true);
+    const { data: users } = await supabase
+      .from('profiles')
+      .select('id, email, name, tier');
+    setAllUsers(users || []);
+    const { data: assigned } = await supabase
+      .from('client_users')
+      .select('user_id')
+      .eq('client_id', c.id);
+    setAssignedUsers((assigned || []).map((u) => u.user_id));
+  }
+
+  async function saveAssignments() {
+    if (!userClient) return;
+    const { data: existing } = await supabase
+      .from('client_users')
+      .select('user_id')
+      .eq('client_id', userClient.id);
+    const current = (existing || []).map((u) => u.user_id);
+    const toAdd = assignedUsers.filter((id) => !current.includes(id));
+    const toRemove = current.filter((id) => !assignedUsers.includes(id));
+    if (toAdd.length)
+      await supabase.from('client_users').insert(
+        toAdd.map((uid) => ({ client_id: userClient.id, user_id: uid }))
+      );
+    for (let uid of toRemove) {
+      await supabase
+        .from('client_users')
+        .delete()
+        .eq('client_id', userClient.id)
+        .eq('user_id', uid);
+    }
+    setShowUsers(false);
   }
 
   async function saveClient(e) {
@@ -118,6 +159,13 @@ export default function ClientsPage() {
                         <FaEdit />
                       </button>
                       <button
+                        onClick={() => openUsers(c)}
+                        className="mr-2 text-teal-400 hover:text-teal-300"
+                        title="Manage Users"
+                      >
+                        <FaUsers />
+                      </button>
+                      <button
                         onClick={() => deleteClient(c.id)}
                         className="text-red-400 hover:text-red-300"
                       >
@@ -180,6 +228,45 @@ export default function ClientsPage() {
               </button>
             </div>
           </form>
+        </div>
+      )}
+      {showUsers && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-dark-gray p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h3 className="text-xl font-semibold text-white mb-4">
+              Manage Users – {userClient?.name}
+            </h3>
+            <div className="max-h-60 overflow-y-auto mb-4 pr-1">
+              {allUsers.map((u) => (
+                <label key={u.id} className="flex items-center gap-2 mb-2 text-white">
+                  <input
+                    type="checkbox"
+                    checked={assignedUsers.includes(u.id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAssignedUsers((list) => [...list, u.id]);
+                      } else {
+                        setAssignedUsers((list) => list.filter((id) => id !== u.id));
+                      }
+                    }}
+                  />
+                  {u.email} ({u.tier})
+                </label>
+              ))}
+            </div>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowUsers(false)}
+                className="btn-secondary"
+              >
+                Cancel
+              </button>
+              <button type="button" onClick={saveAssignments} className="btn-primary">
+                Save
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

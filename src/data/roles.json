@@ -6,7 +6,8 @@
         { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
         { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." },
         { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." },
-        { "id": "users", "label": "User Management", "desc": "Manage user accounts & roles." }
+        { "id": "users", "label": "User Management", "desc": "Manage user accounts & roles." },
+        { "id": "brands", "label": "Brand Management", "desc": "Manage client brands." }
       ]
     },
     "admin": {
@@ -14,7 +15,8 @@
         { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },
         { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
         { "id": "blog", "label": "Blog Management", "desc": "Post, edit, and manage blogs." },
-        { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." }
+        { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." },
+        { "id": "brands", "label": "Brand Management", "desc": "Manage client brands." }
       ]
     },
     "client": {
