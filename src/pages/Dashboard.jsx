@@ -16,7 +16,6 @@ import KanbanWidget from "../components/widgets/KanbanWidget.js";
 
 const Dashboard = () => {
   const { profile } = useContext(UserProfileContext);
-  const { user } = useContext(AuthContext);
   const { isOpen } = useContext(SidebarContext);
 
   const firstName = profile?.name?.split(" ")[0] || "User";
