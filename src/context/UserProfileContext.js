@@ -1,6 +1,11 @@
 // src/context/UserProfileContext.js
 
-import React, { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import PropTypes from "prop-types";
 import { supabase } from "../supabaseClient";
 
@@ -11,6 +16,8 @@ export const UserProfileProvider = ({ children }) => {
     const stored = localStorage.getItem("fedrix_profile");
     return stored ? JSON.parse(stored) : null;
   });
+  const [isLoadingProfile, setIsLoadingProfile] = useState(!profile);
+  const [profileError, setProfileError] = useState(null);
 
   const saveProfile = (data) => {
     localStorage.setItem("fedrix_profile", JSON.stringify(data));
@@ -24,25 +31,51 @@ export const UserProfileProvider = ({ children }) => {
 
   useEffect(() => {
     const load = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) return;
-      const { data } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
-      if (data) {
-        localStorage.setItem("fedrix_profile", JSON.stringify(data));
-        setProfile(data);
+      setIsLoadingProfile(true);
+      setProfileError(null);
+      try {
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
+        if (userError) throw userError;
+        if (!user) {
+          setProfile(null);
+          return;
+        }
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+        if (error) throw error;
+        if (data) {
+          localStorage.setItem("fedrix_profile", JSON.stringify(data));
+          setProfile(data);
+        } else {
+          setProfile(null);
+        }
+      } catch (err) {
+        setProfileError(err);
+        setProfile(null);
+      } finally {
+        setIsLoadingProfile(false);
       }
     };
     if (!profile) load();
   }, [profile]); // run once on mount
 
   return (
-    <UserProfileContext.Provider value={{ profile, saveProfile, logoutProfile }}>
+    <UserProfileContext.Provider
+      value={{
+        profile,
+        userProfile: profile,
+        saveProfile,
+        logoutProfile,
+        isLoadingProfile,
+        profileError,
+      }}
+    >
       {children}
     </UserProfileContext.Provider>
   );
@@ -51,3 +84,12 @@ export const UserProfileProvider = ({ children }) => {
 UserProfileProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export const useUserProfile = () => {
+  const ctx = useContext(UserProfileContext);
+  if (!ctx) throw new Error('useUserProfile must be used within a UserProfileProvider');
+  return ctx;
+};
+
+// Legacy name used in a few components
+export const useProfile = useUserProfile;
