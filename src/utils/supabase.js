@@ -1,17 +1,6 @@
 // src/utils/supabase.js
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    'Supabase config missing! Check your .env: REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY are required.',
-  );
-}
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: { persistSession: true },
-});
+// Re-export the single Supabase client instance to avoid multiple
+// GoTrueClient warnings when the app is loaded in the browser.
+import { supabase } from '../supabaseClient';
 
 export default supabase;
