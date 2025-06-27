@@ -5,6 +5,6 @@ create table if not exists posts (
   snippet text,
   content text,
   image text,
-  created_by uuid references profiles(id),
+  created_by uuid,
   created_at timestamp with time zone default now()
 );

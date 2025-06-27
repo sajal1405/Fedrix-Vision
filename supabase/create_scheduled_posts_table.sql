@@ -1,12 +1,10 @@
 -- SQL schema for scheduled social posts
 create table if not exists scheduled_posts (
   id serial primary key,
-  content text not null,
-  platform text,
-  project text,
-  date date not null,
-  approved boolean default false,
-  created_by uuid references profiles(id),
-  inserted_at timestamp with time zone default now(),
-  updated_at timestamp with time zone default now()
+  user_id uuid,
+  title text,
+  content text,
+  scheduled_at timestamp with time zone,
+  created_at timestamp with time zone default now(),
+  client_id uuid references clients(id)
 );
