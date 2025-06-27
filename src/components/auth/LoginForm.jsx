@@ -47,18 +47,17 @@ const LoginForm = () => {
 
     login(role, user.email);
 
-    const { data: profile, error: profileError } = await supabase
+    const { data: profile } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', user.id)
       .single();
 
-    if (profile && !profileError) {
+    if (profile) {
       saveProfile(profile);
-      navigate('/dashboard');
-    } else {
-      navigate('/profile');
     }
+
+    navigate('/dashboard');
   }, [email, password, login, navigate, saveProfile]);
 
   useEffect(() => {
