@@ -1,0 +1,100 @@
+# Fedrix Vision Supabase Configuration
+
+## Tables
+- agent_logs
+- blogs
+- campaign_roi
+- campaign_stats
+- chat_sessions
+- client_socials
+- client_users
+- clients
+- events
+- messages
+- notifications
+- page_visits
+- posts
+- projects
+- reminders
+- scheduled_posts
+- subtasks
+- tasks
+- tasks_activity
+- user_profiles
+
+## Storage Buckets
+- avatar (public)
+- uploads (public)
+- project-files (private)
+
+## SQL Setup
+-- Run the create scripts in `supabase/` if the tables do not exist
+-- Example:
+--   psql < supabase/create_tasks_table.sql
+--   psql < supabase/create_subtasks_table.sql
+-- ...and so on for each file
+
+-- Enable row level security and realtime
+alter table if exists tasks enable row level security;
+create policy if not exists "Tasks owned by user" on tasks
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+alter table if exists subtasks enable row level security;
+create policy if not exists "Subtasks owned by user" on subtasks
+  for all using (auth.uid() = assigned_to) with check (auth.uid() = assigned_to);
+
+alter table if exists notifications enable row level security;
+create policy if not exists "Notifications for user" on notifications
+  for select using (auth.uid() = user_id);
+
+alter table if exists user_profiles enable row level security;
+create policy if not exists "Profile owner" on user_profiles
+  for select using (auth.uid() = id);
+
+alter table if exists tasks_activity enable row level security;
+create policy if not exists "Activity visible" on tasks_activity
+  for select using (auth.uid() = actor_id);
+
+-- Add tables to the realtime publication if not already present
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='tasks') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE tasks;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='subtasks') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE subtasks;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='notifications') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE notifications;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='user_profiles') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE user_profiles;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='tasks_activity') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE tasks_activity;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='events') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE events;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='reminders') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE reminders;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='chat_sessions') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE chat_sessions;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE publication='supabase_realtime' AND tablename='messages') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE messages;
+  END IF;
+END $$;
+
+-- Create storage buckets if needed
+insert into storage.buckets (id, name, public)
+  values ('avatar', 'avatar', true)
+  on conflict (id) do update set public = excluded.public;
+insert into storage.buckets (id, name, public)
+  values ('uploads', 'uploads', true)
+  on conflict (id) do update set public = excluded.public;
+insert into storage.buckets (id, name, public)
+  values ('project-files', 'project-files', false)
+  on conflict (id) do update set public = excluded.public;
+
