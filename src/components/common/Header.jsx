@@ -96,6 +96,8 @@ const Header = forwardRef((props, ref) => {
       </div>
     </motion.header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
