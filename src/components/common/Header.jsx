@@ -1,15 +1,32 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { HiMenuAlt3 } from "react-icons/hi";
+import { useLocation } from "react-router-dom";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { SidebarContext } from "../../context/SidebarContext";
 import UserMenu from "./UserMenu.jsx";
+import HologramTitle from "./HologramTitle.jsx";
 
 const Header = () => {
   const { profile } = useContext(UserProfileContext);
+  const location = useLocation();
 
   const { toggleSidebar } = useContext(SidebarContext);
   const tier = profile?.role || "guest";
+
+  const pageTitles = {
+    "/dashboard": "Dashboard",
+    "/dashboard/kanban": "Kanban Board",
+    "/dashboard/calendar": "Calendar",
+    "/dashboard/blog": "Blog",
+    "/dashboard/agent": "AI Agent",
+    "/dashboard/reminders": "Reminders",
+    "/dashboard/clients": "Brands",
+    "/dashboard/users": "Users",
+    "/dashboard/profile": "Profile",
+    "/dashboard/settings": "Settings",
+  };
+  const title = pageTitles[location.pathname] || "Fedrix Vision";
 
   return (
     <motion.header
@@ -22,9 +39,7 @@ const Header = () => {
         <button onClick={toggleSidebar} className="text-white focus:outline-none">
           <HiMenuAlt3 className="text-2xl" />
         </button>
-        <div className="text-lg font-bold text-gray-300 tracking-wide">
-          Fedrix Vision
-        </div>
+        <HologramTitle title={title} />
       </div>
 
       <div className="flex items-center gap-4">

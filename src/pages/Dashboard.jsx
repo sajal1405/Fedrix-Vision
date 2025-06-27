@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UserProfileContext } from "../context/UserProfileContext";
-import { SidebarContext } from "../context/SidebarContext";
 import { motion } from "framer-motion";
 import {
   StatCard,
@@ -15,22 +14,19 @@ import KanbanWidget from "../components/widgets/KanbanWidget.js";
 
 const Dashboard = () => {
   const { profile } = useContext(UserProfileContext);
-  const { isOpen } = useContext(SidebarContext);
 
   const firstName = profile?.name?.split(" ")[0] || "User";
 
   return (
-    <div className="dashboard-wrapper">
-      <div className={`dashboard-main ${isOpen ? 'ml-[220px]' : 'ml-0'}`}>
-        <div className="dashboard-content space-y-10">
-          <motion.div
-            className="text-white text-2xl font-semibold tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            👋 Welcome back, <span className="text-gray-300">{firstName}</span>
-          </motion.div>
+    <div className="dashboard-content space-y-10">
+      <motion.div
+        className="text-white text-2xl font-semibold tracking-wide"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        👋 Welcome back, <span className="text-gray-300">{firstName}</span>
+      </motion.div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard
@@ -66,13 +62,7 @@ const Dashboard = () => {
             <RecentActivityFeed />
           </div>
 
-          <KanbanWidget />
-        </div>
-
-        <footer className="text-center mt-10 text-white/30 text-sm">
-          ⓒ {new Date().getFullYear()} Fedrix MediaLab. All rights reserved.
-        </footer>
-      </div>
+      <KanbanWidget />
     </div>
   );
 };

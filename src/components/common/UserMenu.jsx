@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { UserProfileContext } from '../../context/UserProfileContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -17,9 +17,6 @@ const UserMenu = () => {
     navigate('/login');
   };
 
-  if (!profile?.name) {
-    return <Navigate to="/profile" replace />;
-  }
 
   return (
     <div>
