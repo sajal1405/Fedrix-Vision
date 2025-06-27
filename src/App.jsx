@@ -4,7 +4,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import Login from "./pages/Login";
+import LoginPage from "./pages/auth/LoginPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import KanbanBoard from "./components/kanban/KanbanBoard.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
@@ -44,7 +44,7 @@ const App = () => {
           },
           {
             path: '/login',
-            element: <Login />,
+            element: <LoginPage />,
           },
           {
             path: '/dashboard/profile',
