@@ -10,16 +10,34 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const loadUserWithRole = async (user) => {
+    if (!user) return null;
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+    if (error) {
+      console.error('Failed to load user profile', error);
+      return user;
+    }
+    return { ...user, role: data?.role };
+  };
+
   useEffect(() => {
-    supabase.auth.getUser().then(({ data, error }) => {
-      if (!error) setCurrentUser(data?.user || null);
+    supabase.auth.getUser().then(async ({ data, error }) => {
+      if (!error) {
+        const userWithRole = await loadUserWithRole(data?.user);
+        setCurrentUser(userWithRole);
+      }
       setIsLoading(false);
     });
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setCurrentUser(session?.user || null);
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      const userWithRole = await loadUserWithRole(session?.user);
+      setCurrentUser(userWithRole);
       setIsLoading(false);
     });
 
