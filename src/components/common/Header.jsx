@@ -9,7 +9,7 @@ const Header = () => {
   const { profile } = useContext(UserProfileContext);
 
   const { toggleSidebar } = useContext(SidebarContext);
-  const tier = profile?.tier || "guest";
+  const tier = profile?.role || "guest";
 
   return (
     <motion.header

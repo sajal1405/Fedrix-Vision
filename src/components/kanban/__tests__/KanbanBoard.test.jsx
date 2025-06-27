@@ -40,7 +40,7 @@ test('handles failed subscription gracefully', async () => {
   const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
   const { unmount } = render(
-    <UserProfileContext.Provider value={{ profile: { id: '1', tier: 'admin' } }}>
+    <UserProfileContext.Provider value={{ profile: { id: '1', role: 'admin' } }}>
       <KanbanBoard />
     </UserProfileContext.Provider>
   );

@@ -137,7 +137,7 @@ const App = () => {
           {
             path: '/dashboard/users',
             element: (
-              <ProtectedRoute requiredRole="superadmin">
+              <ProtectedRoute requiredRole="super_admin">
                 <DashboardLayout>
                   <UserManagement />
                 </DashboardLayout>

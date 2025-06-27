@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '../../supabaseClient';
 const logo = '/fedrix.svg';
-import { AuthContext } from '../../context/AuthContext';
 import { UserProfileContext } from '../../context/UserProfileContext';
 
 const LoginForm = () => {
@@ -21,7 +20,6 @@ const LoginForm = () => {
   const [slidIn, setSlidIn] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
   const { saveProfile } = useContext(UserProfileContext);
 
   const handleLogin = useCallback(async () => {
@@ -38,17 +36,9 @@ const LoginForm = () => {
     }
 
     const { user } = data;
-    const metadata = user.user_metadata || {};
-    let role = metadata.role || 'client';
-
-    if (user.email === 'sajal@fedrixgroup.com') {
-      role = 'superadmin';
-    }
-
-    login(role, user.email);
 
     const { data: profile } = await supabase
-      .from('profiles')
+      .from('user_profiles')
       .select('*')
       .eq('id', user.id)
       .single();
@@ -58,7 +48,7 @@ const LoginForm = () => {
     }
 
     navigate('/dashboard');
-  }, [email, password, login, navigate, saveProfile]);
+  }, [email, password, navigate, saveProfile]);
 
   useEffect(() => {
     const knob = knobRef.current;

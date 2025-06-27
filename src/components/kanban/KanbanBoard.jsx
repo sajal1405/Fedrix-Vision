@@ -26,12 +26,12 @@ const KanbanBoard = () => {
     if (error) console.error("Fetch Error", error);
 
     const visibleTasks =
-      profile?.tier === "admin"
+      profile?.role === "admin"
         ? data
         : data.filter((t) => t.created_by === profile?.id);
 
     setTasks(visibleTasks);
-  }, [profile?.id, profile?.tier]);
+  }, [profile?.id, profile?.role]);
 
   // Initial + Real-time Sync
   useEffect(() => {

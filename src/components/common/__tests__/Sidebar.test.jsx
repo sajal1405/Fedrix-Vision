@@ -5,12 +5,12 @@ import { AuthContext } from '../../../context/AuthContext';
 import { UserProfileContext } from '../../../context/UserProfileContext';
 import { SidebarContext } from '../../../context/SidebarContext';
 
-function renderSidebar(tier = 'admin', isOpen = true, opts = {}) {
+function renderSidebar(role = 'admin', isOpen = true, opts = {}) {
   const logout = opts.logout || jest.fn();
   const logoutProfile = opts.logoutProfile || jest.fn();
   render(
-    <AuthContext.Provider value={{ user: { role: tier }, logout }}>
-      <UserProfileContext.Provider value={{ profile: { tier, name: 'Test User' }, logoutProfile }}>
+    <AuthContext.Provider value={{ user: { role }, logout }}>
+      <UserProfileContext.Provider value={{ profile: { role, name: 'Test User' }, logoutProfile }}>
         <SidebarContext.Provider value={{ isOpen }}>
           <MemoryRouter>
             <Sidebar />

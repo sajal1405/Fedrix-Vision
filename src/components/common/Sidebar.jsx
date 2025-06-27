@@ -18,7 +18,7 @@ const Sidebar = () => {
   const { logoutProfile, profile } = useContext(UserProfileContext);
   const { isOpen } = useContext(SidebarContext);
   const navigate = useNavigate();
-  const tier = profile?.tier || user?.role || "client";
+  const role = profile?.role || user?.role || "user";
 
   const handleLogout = () => {
     logout();
@@ -28,13 +28,13 @@ const Sidebar = () => {
 
   const navItems = [
     { to: "/dashboard", icon: <HiViewBoards />, label: "Dashboard" },
-    { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "client", "superadmin"] },
-    { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin", "superadmin"] },
-    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "client", "superadmin"] },
-    { to: "/dashboard/agent", icon: <HiOutlineSparkles />, label: "AI Agent", roles: ["admin", "superadmin"] },
-    { to: "/dashboard/reminders", icon: <HiOutlineBell />, label: "Reminders", roles: ["admin", "client", "superadmin"] },
-    { to: "/dashboard/clients", icon: <HiOutlineUsers />, label: "Brands", roles: ["admin", "superadmin"] },
-    { to: "/dashboard/users", icon: <HiOutlineUsers />, label: "Users", roles: ["superadmin"] },
+    { to: "/dashboard/kanban", icon: <HiViewBoards />, label: "Kanban", roles: ["admin", "member", "super_admin"] },
+    { to: "/dashboard/calendar", icon: <HiOutlineCalendar />, label: "Calendar", roles: ["admin", "super_admin"] },
+    { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "member", "super_admin"] },
+    { to: "/dashboard/agent", icon: <HiOutlineSparkles />, label: "AI Agent", roles: ["admin", "super_admin"] },
+    { to: "/dashboard/reminders", icon: <HiOutlineBell />, label: "Reminders", roles: ["admin", "member", "super_admin"] },
+    { to: "/dashboard/clients", icon: <HiOutlineUsers />, label: "Brands", roles: ["admin", "super_admin"] },
+    { to: "/dashboard/users", icon: <HiOutlineUsers />, label: "Users", roles: ["super_admin"] },
   ];
 
   return (
@@ -50,7 +50,7 @@ const Sidebar = () => {
 
       <nav className="flex flex-col space-y-4">
         {navItems
-          .filter((item) => !item.roles || item.roles.includes(tier))
+          .filter((item) => !item.roles || item.roles.includes(role))
           .map((item, idx) => (
             <NavLink
               key={idx}

@@ -51,7 +51,7 @@ beforeEach(() => {
 
 test('renders events and filters by type', async () => {
   render(
-    <UserProfileContext.Provider value={{ profile: { id: '1', tier: 'admin' } }}>
+    <UserProfileContext.Provider value={{ profile: { id: '1', role: 'admin' } }}>
       <Calendar />
     </UserProfileContext.Provider>
   );
@@ -66,7 +66,7 @@ test('renders events and filters by type', async () => {
 
 test('opens modal when event clicked', async () => {
   render(
-    <UserProfileContext.Provider value={{ profile: { id: '1', tier: 'admin' } }}>
+    <UserProfileContext.Provider value={{ profile: { id: '1', role: 'admin' } }}>
       <Calendar />
     </UserProfileContext.Provider>
   );

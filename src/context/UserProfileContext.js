@@ -44,7 +44,7 @@ export const UserProfileProvider = ({ children }) => {
           return;
         }
         const { data, error } = await supabase
-          .from("profiles")
+          .from("user_profiles")
           .select("*")
           .eq("id", user.id)
           .single();

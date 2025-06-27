@@ -25,13 +25,13 @@ const ReminderList = () => {
     }
 
     const filtered =
-      profile?.tier === "admin" || profile?.tier === "superadmin"
+      profile?.role === "admin" || profile?.role === "super_admin"
         ? data
         : data.filter((r) => r.created_by === profile?.id);
 
     setReminders(filtered || []);
     setErrorMsg("");
-  }, [profile?.id, profile?.tier]);
+  }, [profile?.id, profile?.role]);
 
   useEffect(() => {
     if (!profile?.id) return;

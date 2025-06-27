@@ -20,7 +20,7 @@ const Calendar = () => {
     const { data } = await supabase.from("events").select("*").order("start", { ascending: true });
 
     const filtered =
-      profile?.tier === "admin"
+      profile?.role === "admin"
         ? data
         : data.filter((e) => e.created_by === profile?.id);
 
@@ -31,7 +31,7 @@ const Calendar = () => {
     }));
 
     setEvents(mapped);
-  }, [profile?.id, profile?.tier]);
+  }, [profile?.id, profile?.role]);
 
   useEffect(() => {
     if (!profile?.id) return;

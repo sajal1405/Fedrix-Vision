@@ -28,7 +28,7 @@ const renderWithProfile = (ui, profile) => {
 
 describe('UserManagement', () => {
   test('renders management interface', () => {
-    renderWithProfile(<UserManagement />, { tier: 'superadmin' });
+    renderWithProfile(<UserManagement />, { role: 'super_admin' });
     expect(screen.getByText('User Management')).toBeInTheDocument();
     expect(screen.getByText('Create User')).toBeInTheDocument();
   });

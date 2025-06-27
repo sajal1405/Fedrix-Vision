@@ -1,6 +1,6 @@
 {
   "roles": {
-    "superadmin": {
+    "super_admin": {
       "modules": [
         { "id": "kanban", "label": "Kanban Board", "desc": "Task management with drag & drop." },
         { "id": "calendar", "label": "Calendar", "desc": "Plan and view project schedules." },
@@ -19,7 +19,7 @@
         { "id": "brands", "label": "Brand Management", "desc": "Manage client brands." }
       ]
     },
-    "client": {
+    "member": {
       "modules": [
         { "id": "kanban", "label": "Kanban Board", "desc": "Task updates & project overview." },
         { "id": "agent", "label": "AI Agent", "desc": "Generate marketing drafts." }

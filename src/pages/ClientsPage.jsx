@@ -47,8 +47,8 @@ export default function ClientsPage() {
     setUserClient(c);
     setShowUsers(true);
     const { data: users } = await supabase
-      .from('profiles')
-      .select('id, email, name, tier');
+      .from('user_profiles')
+      .select('id, email, full_name, role');
     setAllUsers(users || []);
     const { data: assigned } = await supabase
       .from('client_users')
@@ -250,7 +250,7 @@ export default function ClientsPage() {
                       }
                     }}
                   />
-                  {u.email} ({u.tier})
+                  {u.email} ({u.role})
                 </label>
               ))}
             </div>

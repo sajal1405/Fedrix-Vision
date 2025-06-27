@@ -1,18 +1,18 @@
 // src/components/auth/ProtectedRoute.js
 
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
-  const { user } = useContext(AuthContext);
-  if (!user) return <Navigate to="/login" replace />;
+  const { currentUser } = useAuth();
+  if (!currentUser) return <Navigate to="/login" replace />;
 
   if (
     requiredRole &&
-    user.role !== requiredRole &&
-    !(user.role === "superadmin" && requiredRole === "admin")
+    currentUser.role !== requiredRole &&
+    !(currentUser.role === "super_admin" && requiredRole === "admin")
   ) {
     return <Navigate to="/unauthorized" replace />;
   }

@@ -3,19 +3,19 @@ import PropTypes from "prop-types"; // eslint-disable-line no-unused-vars
 import { supabase } from "../../supabaseClient";
 import { motion } from "framer-motion";
 
-const roles = ["superadmin", "admin", "client"];
+const roles = ["super_admin", "admin", "member", "user"];
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("client");
+  const [role, setRole] = useState("user");
   const [errorMsg, setErrorMsg] = useState("");
 
   const fetchUsers = async () => {
     const { data, error } = await supabase
-      .from("profiles")
-      .select("id, email, name, tier")
+      .from("user_profiles")
+      .select("id, email, full_name, role")
       .order("created_at", { ascending: false });
     if (error) {
       console.error("Fetch users error", error);
@@ -45,10 +45,11 @@ const UserManagement = () => {
     }
 
     const { user } = data;
-    const { error: insertError } = await supabase.from("profiles").insert({
+    const { error: insertError } = await supabase.from("user_profiles").insert({
       id: user.id,
       email: user.email,
-      tier: role,
+      role,
+      full_name: '',
     });
     if (insertError) {
       console.error("Profile insert error", insertError);
@@ -58,15 +59,15 @@ const UserManagement = () => {
 
     setEmail("");
     setPassword("");
-    setRole("client");
+    setRole("user");
     setErrorMsg("");
     fetchUsers();
   };
 
   const updateRole = async (id, newRole) => {
     const { error: updateError } = await supabase
-      .from("profiles")
-      .update({ tier: newRole })
+      .from("user_profiles")
+      .update({ role: newRole })
       .eq("id", id);
     if (updateError) {
       console.error("Update role error", updateError);
@@ -152,10 +153,10 @@ const UserManagement = () => {
             {users.map((u) => (
               <tr key={u.id} className="border-b border-white/5">
                 <td className="p-3">{u.email}</td>
-                <td className="p-3">{u.name || "-"}</td>
+                <td className="p-3">{u.full_name || "-"}</td>
                 <td className="p-3">
                   <select
-                    value={u.tier}
+                    value={u.role}
                     onChange={(e) => updateRole(u.id, e.target.value)}
                     className="bg-black border border-white/10 rounded-md p-1"
                   >
