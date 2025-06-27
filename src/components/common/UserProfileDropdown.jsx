@@ -39,14 +39,14 @@ const UserProfileDropdown = ({ signOut, onClose }) => {
 
   if (isLoadingProfile) {
     return (
-      <div className="absolute right-0 mt-2 w-64 bg-dark-gray border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-white/90 z-40">
+      <div className="absolute right-0 mt-2 w-64 bg-black/80 backdrop-blur-lg border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-white/90 z-40">
         Loading profile...
       </div>
     );
   }
   if (profileError) {
     return (
-      <div className="absolute right-0 mt-2 w-64 bg-dark-gray border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-red-400 z-40">
+      <div className="absolute right-0 mt-2 w-64 bg-black/80 backdrop-blur-lg border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-red-400 z-40">
         Error loading profile.
       </div>
     );
@@ -58,7 +58,7 @@ const UserProfileDropdown = ({ signOut, onClose }) => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="absolute right-0 mt-2 w-64 bg-dark-gray border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-white/90 z-40"
+      className="absolute right-0 mt-2 w-64 bg-black/80 backdrop-blur-lg border border-mid-gray rounded-lg shadow-xl p-4 text-sm text-white/90 z-40"
     >
       <div className="flex items-center border-b border-mid-gray pb-3 mb-3">
         <img
