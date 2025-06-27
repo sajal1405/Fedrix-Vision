@@ -23,6 +23,7 @@ import DashboardLayout from "./components/common/DashboardLayout.jsx";
 import AnimatedBackground from "./components/common/AnimatedBackground.jsx";
 import { AgentAIProvider } from "./context/AgentAIContext";
 import Reminders from "./pages/Reminders.jsx";
+import { NotificationsProvider } from "./context/NotificationsContext";
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -153,21 +154,23 @@ const App = () => {
   return (
     <AuthProvider>
       <UserProfileProvider>
-        <AgentAIProvider>
-          <SidebarProvider>
-            {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
-            <AnimatedBackground />
-            {!showSplash && (
-              <RouterProvider
-                router={router}
-                future={{
-                  v7_startTransition: true,
-                  v7_relativeSplatPath: true,
-                }}
-              />
-            )}
-          </SidebarProvider>
-        </AgentAIProvider>
+        <NotificationsProvider>
+          <AgentAIProvider>
+            <SidebarProvider>
+              {showSplash && <Splash onComplete={() => setShowSplash(false)} />}
+              <AnimatedBackground />
+              {!showSplash && (
+                <RouterProvider
+                  router={router}
+                  future={{
+                    v7_startTransition: true,
+                    v7_relativeSplatPath: true,
+                  }}
+                />
+              )}
+            </SidebarProvider>
+          </AgentAIProvider>
+        </NotificationsProvider>
       </UserProfileProvider>
     </AuthProvider>
   );
