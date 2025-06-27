@@ -38,6 +38,7 @@ const Footer = forwardRef((props, ref) => (
         v1.0.0 | Fedrix MediaLab
       </span>
     </div>
-  </footer>
+ </footer>
 ));
+Footer.displayName = 'Footer';
 export default Footer;
