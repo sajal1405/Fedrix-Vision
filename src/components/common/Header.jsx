@@ -49,7 +49,7 @@ const Header = () => {
 
   return (
     <motion.header
-      className="w-full flex items-center justify-between px-8 py-4 border-b border-white/10 backdrop-blur-xl bg-white/5 z-20"
+      className="fixed top-0 left-0 right-0 w-full flex items-center justify-between px-8 py-4 border-b border-white/10 backdrop-blur-xl bg-white/5 z-40"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -77,13 +77,11 @@ const Header = () => {
             onClick={() => setOpenProfile((o) => !o)}
             className="flex items-center space-x-2 focus:outline-none"
           >
-            {profile?.avatar && (
-              <img
-                src={profile.avatar}
-                alt="avatar"
-                className="w-6 h-6 rounded-full object-cover"
-              />
-            )}
+            <img
+              src={profile?.avatar || 'https://placehold.co/40/00bf8b/FFFFFF?text=AV'}
+              alt="avatar"
+              className="w-6 h-6 rounded-full object-cover"
+            />
             <span className="whitespace-nowrap">{profile?.full_name || profile?.name || profile?.email}</span>
             <HiChevronDown className="text-white" />
           </button>
