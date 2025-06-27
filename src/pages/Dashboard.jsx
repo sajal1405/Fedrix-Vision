@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UserProfileContext } from "../context/UserProfileContext";
-import { AuthContext } from "../context/AuthContext";
 import { SidebarContext } from "../context/SidebarContext";
 import { motion } from "framer-motion";
 import {
