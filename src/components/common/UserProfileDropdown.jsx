@@ -78,14 +78,14 @@ const UserProfileDropdown = ({ signOut, onClose }) => {
         </div>
       </div>
       <NavLink
-        to="/profile"
+        to="/dashboard/profile"
         className="flex items-center p-2 rounded-md hover:bg-mid-gray transition-colors mb-1 text-white/90"
         onClick={onClose}
       >
         <FaUserCircle className="mr-3" /> My Profile
       </NavLink>
       <NavLink
-        to="/settings"
+        to="/dashboard/settings"
         className="flex items-center p-2 rounded-md hover:bg-mid-gray transition-colors mb-1 text-white/90"
         onClick={onClose}
       >

@@ -12,7 +12,6 @@ import BlogManagement from "./pages/BlogManagement.jsx";
 import AgentAIDashboard from "./components/ai/AgentDashboard.jsx";
 import UserManagement from "./components/admin/UserManagement.jsx";
 import ClientsPage from "./pages/ClientsPage.jsx";
-import ProfileSetup from "./pages/ProfileSetup.jsx";
 import Profile from "./pages/Profile.jsx";
 import ProfileSettings from "./pages/ProfileSettings.jsx";
 import { AuthProvider } from "./context/AuthContext";
@@ -39,10 +38,6 @@ const App = () => {
           {
             path: '/login',
             element: <Login />,
-          },
-          {
-            path: '/profile',
-            element: <ProfileSetup />,
           },
           {
             path: '/dashboard/profile',

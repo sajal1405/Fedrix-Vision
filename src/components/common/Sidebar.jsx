@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserProfileContext } from "../../context/UserProfileContext";
 import { SidebarContext } from "../../context/SidebarContext";
@@ -10,21 +10,13 @@ import {
   HiOutlineUsers,
   HiOutlineSparkles,
   HiOutlineBell,
-  HiOutlineLogout,
 } from "react-icons/hi";
 
 const Sidebar = () => {
-  const { logout, user } = useContext(AuthContext);
-  const { logoutProfile, profile } = useContext(UserProfileContext);
-  const { isOpen } = useContext(SidebarContext);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const { profile } = useContext(UserProfileContext);
+  const { isOpen, openSidebar, closeSidebar } = useContext(SidebarContext);
   const role = profile?.role || user?.role || "user";
-
-  const handleLogout = () => {
-    logout();
-    logoutProfile();
-    navigate("/login");
-  };
 
   const navItems = [
     { to: "/dashboard", icon: <HiViewBoards />, label: "Dashboard" },
@@ -39,11 +31,13 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-full bg-black border-r border-white/10 px-6 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
-        isOpen ? "w-56 translate-x-0" : "w-0 -translate-x-full"
+      onMouseEnter={openSidebar}
+      onMouseLeave={closeSidebar}
+      className={`fixed top-0 left-0 h-full bg-black border-r border-white/10 px-4 py-8 z-50 shadow-xl overflow-x-hidden transition-all duration-300 ${
+        isOpen ? "w-56" : "w-20"
       }`}
     >
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 whitespace-nowrap">
         <h1 className="text-gray-300 text-xl font-bold">Fedrix Vision</h1>
         <p className="text-white/40 text-xs mt-1">Welcome, {profile?.name?.split(" ")[0]}</p>
       </div>
@@ -64,20 +58,11 @@ const Sidebar = () => {
               }
             >
               <span className="text-lg">{item.icon}</span>
-              {item.label}
+              <span className={`${isOpen ? "inline" : "hidden"}`}>{item.label}</span>
             </NavLink>
           ))}
       </nav>
 
-      <div className="absolute bottom-6 w-full left-0 px-6">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 w-full text-white/70 hover:text-red-500 transition-all"
-        >
-          <HiOutlineLogout className="text-lg" />
-          Logout
-        </button>
-      </div>
     </aside>
   );
 };
