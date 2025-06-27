@@ -148,7 +148,14 @@ The application requires the following tables inside your Supabase database:
 - `page_visits` – defined in `supabase/create_analytics_tables.sql`
 - `profiles` – defined in `supabase/create_profiles_table.sql`
 
-Apply the SQL files using the `psql` CLI. For example:
+You can apply all migrations at once using the helper script:
+
+```bash
+SUPABASE_DB_URL=postgres://user:pass@localhost:5432/postgres \
+  ./scripts/setup_database.sh
+```
+
+If you prefer to run them manually, use `psql`:
 
 ```bash
 # Create analytics tables
