@@ -90,7 +90,7 @@ const ChatWindow = ({
           .from('messages')
           .select('*')
           .eq('session_id', currentSessionId)
-          .order('timestamp', { ascending: true });
+          .order('created_at', { ascending: true });
 
         if (error) throw error;
 
@@ -155,7 +155,7 @@ const ChatWindow = ({
           .insert({
             session_id: currentSessionId,
             sender: 'user',
-            text_content: text,
+            content: text,
             model_id: activeModelId,
             user_id: userId,
           });
@@ -186,7 +186,7 @@ const ChatWindow = ({
           .insert({
             session_id: currentSessionId,
             sender: 'model',
-            text_content: aiResponseText,
+            content: aiResponseText,
             model_id: activeModelId,
             user_id: userId,
           });

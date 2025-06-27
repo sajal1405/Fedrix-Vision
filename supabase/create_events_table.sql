@@ -10,6 +10,8 @@ create table if not exists events (
   tag_color text,
   priority text,
   type text not null default 'meeting',
-  created_by uuid references profiles(id),
-  created_at timestamp with time zone default now()
+  created_by uuid,
+  created_at timestamp with time zone default now(),
+  event_date timestamp with time zone,
+  user_id uuid
 );
