@@ -54,7 +54,7 @@ beforeEach(() => {
 
 const renderList = () =>
   render(
-    <UserProfileContext.Provider value={{ profile: { id: '1', tier: 'admin', name: 'Test' } }}>
+    <UserProfileContext.Provider value={{ profile: { id: '1', role: 'admin', name: 'Test' } }}>
       <ReminderList />
     </UserProfileContext.Provider>
   );

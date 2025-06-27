@@ -39,7 +39,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, isLoading, login, logout, register }}
+      value={{
+        currentUser,
+        user: currentUser, // alias for backwards compatibility
+        isLoading,
+        login,
+        logout,
+        register,
+      }}
     >
       {children}
     </AuthContext.Provider>

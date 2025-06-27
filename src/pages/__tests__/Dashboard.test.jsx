@@ -49,7 +49,7 @@ function renderWithRole(role) {
 
 describe('Dashboard module visibility', () => {
   test('superadmin sees all standard modules', () => {
-    renderWithRole('superadmin');
+    renderWithRole('super_admin');
     expect(screen.getByText(/Taskboard/i)).toBeInTheDocument();
     expect(screen.getByText(/Calendar/i)).toBeInTheDocument();
     expect(screen.getByText(/Blog Manager/i)).toBeInTheDocument();

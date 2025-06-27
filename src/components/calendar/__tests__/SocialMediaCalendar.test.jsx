@@ -42,7 +42,7 @@ beforeEach(() => {
 function renderCalendar(ctx = {}) {
   return render(
     <AuthContext.Provider value={{ user: { email: 'a' } }}>
-      <UserProfileContext.Provider value={{ profile: { id: '1', tier: 'admin' } }}>
+      <UserProfileContext.Provider value={{ profile: { id: '1', role: 'admin' } }}>
         <AgentAIContext.Provider value={{ generateContent: ctx.generateContent || jest.fn().mockResolvedValue('Generated'), loading: false }}>
           <SocialMediaCalendar />
         </AgentAIContext.Provider>

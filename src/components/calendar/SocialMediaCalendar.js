@@ -28,14 +28,14 @@ const SocialMediaCalendar = () => {
       if (error) throw error;
 
       const visible =
-        profile?.tier === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
+        profile?.role === "admin" ? data : data.filter((p) => p.created_by === profile?.id);
       setPosts(visible);
       setErrorMsg("");
     } catch (err) {
       console.error("Fetch posts error", err);
       setErrorMsg(err.message || "Failed to fetch posts");
     }
-  }, [profile?.id, profile?.tier]);
+  }, [profile?.id, profile?.role]);
 
   useEffect(() => {
     if (!user?.email) return;

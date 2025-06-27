@@ -15,7 +15,7 @@ const ProfileSettings = () => {
 
     const updates = { bio, experience, social_links: social };
     const { data, error } = await supabase
-      .from("profiles")
+      .from("user_profiles")
       .update(updates)
       .eq("id", profile.id)
       .select()

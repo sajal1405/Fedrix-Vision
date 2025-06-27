@@ -6,10 +6,10 @@ import BlogList from "../components/blog/BlogList.jsx";
 
 const BlogManagement = () => {
   const { profile } = useContext(UserProfileContext);
-  const tier = profile?.tier || "guest";
+  const role = profile?.role || "guest";
 
   const renderContent = () => {
-    if (tier === "admin") {
+    if (role === "admin") {
       return (
         <div className="bg-white/5 p-6 border border-white/10 rounded-xl shadow-lg">
           <BlogManager />
@@ -17,7 +17,7 @@ const BlogManagement = () => {
       );
     }
 
-    if (tier === "client") {
+    if (role === "member") {
       return (
         <div className="bg-white/5 p-6 border border-white/10 rounded-xl shadow-lg">
           <BlogList posts={profile?.blogPreviews || []} />

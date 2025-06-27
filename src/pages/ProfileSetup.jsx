@@ -35,15 +35,15 @@ const ProfileSetup = () => {
       name,
       company,
       avatar,
-      tier:
+      role:
         supaUser.email === "sajal@fedrixgroup.com"
-          ? "superadmin"
+          ? "super_admin"
           : supaUser.email.includes("admin")
             ? "admin"
-            : "client",
+            : "member",
     };
 
-    await supabase.from("profiles").upsert(profileData);
+    await supabase.from("user_profiles").upsert(profileData);
     saveProfile(profileData);
     navigate("/dashboard");
   };

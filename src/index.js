@@ -6,6 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { AnimatePresence } from "framer-motion";
 import ErrorBoundary from "./components/common/ErrorBoundary.jsx";
+import CustomCursor from "./components/common/CustomCursor.jsx";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 // Initialize AOS on load
@@ -22,6 +23,7 @@ root.render(
   <React.StrictMode>
     <AnimatePresence mode="wait">
       <ErrorBoundary>
+        <CustomCursor />
         <App />
       </ErrorBoundary>
     </AnimatePresence>
