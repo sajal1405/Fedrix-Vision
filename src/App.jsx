@@ -11,6 +11,7 @@ import Calendar from "./components/calendar/Calendar.jsx";
 import BlogManagement from "./pages/BlogManagement.jsx";
 import AgentAIDashboard from "./components/ai/AgentDashboard.jsx";
 import UserManagement from "./components/admin/UserManagement.jsx";
+import ClientsPage from "./pages/ClientsPage.jsx";
 import ProfileSetup from "./pages/ProfileSetup.jsx";
 import Profile from "./pages/Profile.jsx";
 import ProfileSettings from "./pages/ProfileSettings.jsx";
@@ -119,6 +120,16 @@ const App = () => {
               <ProtectedRoute>
                 <DashboardLayout>
                   <Reminders />
+                </DashboardLayout>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: '/dashboard/clients',
+            element: (
+              <ProtectedRoute requiredRole="admin">
+                <DashboardLayout>
+                  <ClientsPage />
                 </DashboardLayout>
               </ProtectedRoute>
             ),

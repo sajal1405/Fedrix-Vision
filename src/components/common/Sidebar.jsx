@@ -33,6 +33,7 @@ const Sidebar = () => {
     { to: "/dashboard/blog", icon: <HiOutlineNewspaper />, label: "Blog", roles: ["admin", "client", "superadmin"] },
     { to: "/dashboard/agent", icon: <HiOutlineSparkles />, label: "AI Agent", roles: ["admin", "superadmin"] },
     { to: "/dashboard/reminders", icon: <HiOutlineBell />, label: "Reminders", roles: ["admin", "client", "superadmin"] },
+    { to: "/dashboard/clients", icon: <HiOutlineUsers />, label: "Brands", roles: ["admin", "superadmin"] },
     { to: "/dashboard/users", icon: <HiOutlineUsers />, label: "Users", roles: ["superadmin"] },
   ];
 
