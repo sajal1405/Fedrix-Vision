@@ -1,32 +1,46 @@
 // src/context/AuthContext.js
 
-import React, { createContext, useState } from "react";
-import PropTypes from "prop-types";
-import { supabase } from "../supabaseClient";
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+import { supabase } from '../supabaseClient';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem("fedrix_user");
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const login = (role, email) => {
-    const loggedUser = { role, email, timestamp: new Date().toISOString() };
-    localStorage.setItem("fedrix_user", JSON.stringify(loggedUser));
-    setUser(loggedUser);
-  };
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data, error }) => {
+      if (!error) setCurrentUser(data?.user || null);
+      setIsLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setCurrentUser(session?.user || null);
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const login = async (email, password) =>
+    supabase.auth.signInWithPassword({ email, password });
+
+  const register = async (email, password) =>
+    supabase.auth.signUp({ email, password });
 
   const logout = async () => {
     await supabase.auth.signOut();
-    localStorage.removeItem("fedrix_user");
-    setUser(null);
-    window.location.href = "/login";
+    setCurrentUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ currentUser, isLoading, login, logout, register }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -34,4 +48,10 @@ export const AuthProvider = ({ children }) => {
 
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
+};
+
+export const useAuth = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
+  return ctx;
 };
