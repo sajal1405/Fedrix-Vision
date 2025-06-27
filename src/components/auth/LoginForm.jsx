@@ -8,7 +8,8 @@ import React, {
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { supabase } from '../../supabaseClient';
+// Use the shared client wrapper to avoid multiple instances
+import supabase from '../../utils/supabase';
 const logo = '/fedrix.svg';
 import { UserProfileContext } from '../../context/UserProfileContext';
 
@@ -47,7 +48,8 @@ const LoginForm = () => {
       saveProfile(profile);
     }
 
-    navigate('/dashboard');
+    // Redirect once the profile is loaded
+    navigate('/dashboard', { replace: true });
   }, [email, password, navigate, saveProfile]);
 
   useEffect(() => {
