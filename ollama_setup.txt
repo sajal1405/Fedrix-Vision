@@ -1,0 +1,18 @@
+Fedrix Vision Local AI Setup
+============================
+
+1. Install the [Ollama](https://github.com/jmorganca/ollama) runtime on the machine hosting the dashboard.
+2. Pull the required models:
+   ```bash
+   ollama pull codellama:7b
+   ollama pull qwen:7b
+   ```
+   You can add additional models if desired.
+3. Start the Ollama server:
+   ```bash
+   ollama serve
+   ```
+   The server listens on `http://localhost:11434` by default.
+4. Ensure the dashboard can reach the server (same machine or configure CORS).
+5. In `OllamaDashboard.jsx` the models appear as **Vision Developer AI** (codellama) and **Vision Creator AI** (qwen). The UI polls `/api/tags` every 10 seconds to check status.
+6. When running, open the Agent chat inside the dashboard. Select a model from the dropdown to start chatting. Messages are stored in the `chat_sessions` and `messages` tables in Supabase.
