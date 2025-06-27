@@ -89,6 +89,7 @@ const StatCard = ({
       className={`hologram-tile py-4 px-5 flex items-center rounded-xl shadow-lg border border-mid-gray
                   transition-all duration-300 ease-in-out hover:shadow-2xl hover:border-teal-500
                   bg-gradient-to-br ${gradient} group ${className}`}
+
       whileHover={{ y: -3, scale: 1.01 }}
     >
       {Icon && (

@@ -43,6 +43,7 @@ const Header = () => {
     navigate('/login');
   };
 
+
   useEffect(() => {
     const t = setInterval(() => setDateTime(new Date()), 60000);
     return () => clearInterval(t);
@@ -69,6 +70,7 @@ const Header = () => {
           {dateTime.toLocaleString()}
         </span>
         <NotificationsDropdown />
+
         <div className="text-white/80 text-xs bg-gray-700/10 px-3 py-1 rounded-full border border-gray-700 uppercase tracking-wide">
           {tier}
         </div>
