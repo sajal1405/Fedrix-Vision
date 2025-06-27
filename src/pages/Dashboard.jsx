@@ -20,28 +20,28 @@ const Dashboard = () => {
               value="12"
               description="Active"
               icon={CheckSquareIcon}
-              gradient="from-fuchsia-600/60 to-pink-800/60"
+              gradient="from-fuchsia-500/40 to-pink-700/40"
             />
             <StatCard
               title="Clients"
               value="8"
               description="Engaged"
               icon={UsersIcon}
-              gradient="from-violet-600/60 to-indigo-800/60"
+              gradient="from-violet-500/40 to-indigo-700/40"
             />
             <StatCard
               title="Revenue"
               value="$24k"
               description="This Month"
               icon={DollarSignIcon}
-              gradient="from-emerald-600/60 to-teal-800/60"
+              gradient="from-emerald-500/40 to-teal-700/40"
             />
             <StatCard
               title="Rating"
               value="4.9"
               description="Average"
               icon={StarIcon}
-              gradient="from-orange-600/60 to-amber-800/60"
+              gradient="from-orange-500/40 to-amber-700/40"
             />
           </div>
 

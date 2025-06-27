@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, forwardRef } from "react";
 import { motion } from "framer-motion";
 import { HiChevronDown } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import HologramTitle from "./HologramTitle.jsx";
 import logo from "../../assets/fedrix.svg";
 
-const Header = () => {
+const Header = forwardRef((props, ref) => {
   const { profile, logoutProfile } = useContext(UserProfileContext);
   const location = useLocation();
 
@@ -49,6 +49,7 @@ const Header = () => {
 
   return (
     <motion.header
+      ref={ref}
       className="fixed top-0 left-0 right-0 w-full flex items-center justify-between px-8 py-4 border-b border-white/10 backdrop-blur-xl bg-white/5 z-40"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

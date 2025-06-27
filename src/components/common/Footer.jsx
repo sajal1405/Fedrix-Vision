@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
-const Footer = () => (
-  <footer className="fixed bottom-0 left-0 w-full bg-dark-gray border-t border-mid-gray h-12 flex items-center justify-between px-8 z-30">
+const Footer = forwardRef((props, ref) => (
+  <footer
+    ref={ref}
+    className="fixed bottom-0 left-0 w-full bg-dark-gray border-t border-mid-gray h-12 flex items-center justify-between px-8 z-30"
+  >
     <span className="font-mono text-[12px] text-teal-300 tracking-widest select-none">
       Fedrix Vision Suite
     </span>
@@ -36,5 +39,5 @@ const Footer = () => (
       </span>
     </div>
   </footer>
-);
+));
 export default Footer;
